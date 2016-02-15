@@ -1,0 +1,63 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\usepackage{siunitx}
+
+\usepackage{fancyhdr} %header
+
+\pagestyle{fancyplain}
+\setlength{\headheight}{27.2pt}
+\fancyhead[R]{3rd Year Project\\Multidimensional Imaging of Ultrafast Laser Pulses}
+\fancyhead[L]{Davide Bazzanella,\\CID 01149516}
+
+\author{Davide Bazzanella}
+\title{Project Plan}
+
+
+\begin{document}
+\textbf{\Huge{Project Plan}}
+\section*{Introduction and goals}
+The goal of this project is to develop a system capable to obtain a multidimensional image of an ultrashort laser pulse.
+
+The last term, two people worked at this project and developed a Push-Broom system and a CASSI system.
+The first one worked, while the latter didn't, probably because of the difficult implementation of the algorithms.
+
+During this term, I will work side by side with one of the two students who worked in the last term.
+Our aim is to develop a Mach-Zender interferometer to measure the spatio-temporal profile of an ultrashort (\SI{3.5}{\fs}) laser pulse from a Ti:Sapphire laser, by employing Fourier-transform spectroscopy techniques.
+
+\section*{Project plan}
+\begin{enumerate}
+\item Build a Mach-Zender interferometer with a moving arm
+%	\begin{itemize}
+%	\item the beams must be in the same horizontal plane.
+%	\item the beam must be aligned to the arm's movement.
+%	\item the output of the beams must be collimated.
+%	\end{itemize}
+\item Test the interferometer with HeNe laser ($\lambda = \SI{633}{\nm}$)
+\item Test the interferometer with white low coherence light, to calibrate the two arms to under \SI{1}{\um} of lenght difference.
+\item Use the interferometer to set up the sensor (camera).
+\item Develop the code to obtain the spatio-temporal imaging of the beam from the sensor output.
+\item Replace the third mirror in one arm with a parabolic mirror and a pinhole, thus creating a reference beam.
+\item Recalibrate the interferometer.
+\item Use the interferometer to characterize the \SI{3.5}{\fs} ultrashort laser pulse of the Ti:Sapphire laser.
+\end{enumerate}
+
+\section*{Reading material}
+\begin{itemize}
+\item Walmsley, Ian A., and Christophe Dorrer. "Characterization of ultrashort electromagnetic pulses." Advances in Optics and Photonics 1.2 (2009): 308-437.
+\item Witting, Tobias, et al. "Characterization of high-intensity sub-4-fs laser pulses using spatially encoded spectral shearing interferometry." Optics letters 36.9 (2011): 1680-1682.
+\item Miranda, Miguel, et al. "Spatiotemporal characterization of ultrashort laser pulses using spatially resolved Fourier transform spectrometry." Optics letters 39.17 (2014): 5142-5145.
+\item Trebino, Rick, and Daniel J. Kane. "Using phase retrieval to measure the intensity and phase of ultrashort pulses: frequency-resolved optical gating." JOSA A 10.5 (1993): 1101-1111.
+\end{itemize}
+
+%\begin{thebibliography}{9}
+%\bibitem{miranda} Miranda, Miguel, et al. "Spatiotemporal characterization of ultrashort laser pulses using spatially resolved Fourier transform spectrometry." Optics letters 39.17 (2014): 5142-5145.
+%\end{thebibliography}
+
+\end{document}
