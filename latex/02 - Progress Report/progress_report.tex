@@ -12,12 +12,14 @@
 \usepackage{fancyhdr} %header
 
 \pagestyle{fancyplain}
+
 \setlength{\headheight}{27.2pt}
 \fancyhead[R]{16 February 2016}
-\fancyhead[L]{Davide Bazzanella, CID 01149516}
-%\setlength{\footheight}{20pt}
-\fancyfoot[R]{3rd Year Project}
-\fancyfoot[L]{Multidimensional Imaging of Ultrafast Laser}
+\fancyhead[L]{Multidimensional Imaging of Ultrafast Laser}
+%\setlength{\footskip}{40pt}
+%\fancyfoot[R]{3rd Year Project}
+\fancyfoot[L]{Davide Bazzanella, CID 01149516}
+%\fancyfoot[C]{a\\\thepage}
 
 \author{Davide Bazzanella}
 \title{Project Plan}
@@ -25,42 +27,56 @@
 
 \begin{document}
 \textbf{\Huge{Progress Report}}
-\section*{Introduction and goals}
-The goal of this project is to develop a system capable to obtain a multidimensional image of an ultrashort laser pulse.
+\section*{Achievements and Difficulties}
+At the beginning, I had to become familiar with the environment and the equipement in the laboratory, but this was just for a short period of time.
+\subsubsection*{Build a Mach-Zender interferometer with a moving arm}
+The first step of the project was to build a Mach-Zender interferometer.
+In doing so, we have encountered a few difficulties, originated mainly by one factor, which is the need for the two output beam to be collimated.
 
-The last term, two people worked at this project and developed a Push-Broom system and a CASSI system.
-The first one worked, while the latter didn't, probably because of the difficult implementation of the algorithms.
+The first problem is that the movement of the arm should not affect the path in other way than its lenght, because even a little offset in the beam direction can led to a movement of the output beam.
+We tried to limit this phenomenon at our best.
+A possible updrade would be to use retroreflectors (cube, sphere).
 
-During this term, I will work side by side with one of the two students who worked in the last term.
-Our aim is to develop a Mach-Zender interferometer to measure the spatio-temporal profile of an ultrashort (\SI{3.5}{\fs}) laser pulse from a Ti:Sapphire laser, by employing Fourier-transform spectroscopy techniques.
+Another difficulty was to keep the beam in the same horizontal plane, which is not required, but leads to a better alignment in the output.
 
-\section*{Project plan}
+\subsubsection*{Test the interferometer with HeNe laser}
+The second step was to test the interferometer with light coming from a HeNe laser generating a continuous wave at $\lambda = \SI{633}{\nm}$.
+
+It is important to have the right input direction, otherwise it could affect the alignment in the output.
+Hence we used a two mirror stage to achieve the best alignement possible for the input beam.
+
+The requirement for interference in a Mach-Zender interferometer is that the difference in lenght between the two arms is within the coherence lenght of the light.
+The HeNe beam has a high coherence lenght, therefore it was useful to accomplish a first calibration of the lenght of the two arms.
+
+\subsubsection*{Test the interferometer with white low coherence light}
+The next step was to test the interferometer with white (broadband) low coherence light, to calibrate the two arms to less than \SI{1}{\um} in lenght difference.
+
+Using a two mirror stage for the white light, we obtained alignement of the two output beams.
+Then we proceeded in moving one arm to calibrate the interferometer, but we didn't see any interference pattern.
+Hence we stepped back and tried to recalibrate the interferometer with the HeNe laser.
+We checked lenght of the arms, beams directionality, beams alignment and we replaced some components (motor of moving platform).
+
+Even though the interferometer was calibrated in the best way with the HeNe laser, we were unable to obtain interference with the white light.
+
+Therefore we agreed to go to the next step anyway.
+
+\subsubsection*{Replacement with parabolic mirror and pinhole}
+The last step we completed is the replacement of the third mirror in the reference arm with a parabolic mirror and a pinhole, thus creating a reference beam.
+We decided to replace the third mirror in the fixed arm to avoid alignement aberrations due to the arm movement and the parabolic mirror.
+
+
+\section*{Work in progress}
+\subsubsection*{Recalibration}
+This week we are in the progress of calibrating the setup with the parabolic mirror.
+With this system, we obtained both interference with the HeNe laser and the Ti:Sapphire laser.
+
+\section*{Work Remaining}
 \begin{enumerate}
-\item Build a Mach-Zender interferometer with a moving arm
-%	\begin{itemize}
-%	\item the beams must be in the same horizontal plane.
-%	\item the beam must be aligned to the arm's movement.
-%	\item the output of the beams must be collimated.
-%	\end{itemize}
-\item Test the interferometer with HeNe laser ($\lambda = \SI{633}{\nm}$)
-\item Test the interferometer with white low coherence light, to calibrate the two arms to under \SI{1}{\um} of lenght difference.
-\item Use the interferometer to set up the sensor (camera).
-\item Develop the code to obtain the spatio-temporal imaging of the beam from the sensor output.
-\item Replace the third mirror in one arm with a parabolic mirror and a pinhole, thus creating a reference beam.
-\item Recalibrate the interferometer.
-\item Use the interferometer to characterize the \SI{3.5}{\fs} ultrashort laser pulse of the Ti:Sapphire laser.
+\item Use the HeNe laser to finish adjusting the setup with the cheap camera as sensor. (\textit{system setup})
+\item Use the HeNe laser, with its known shape (Gaussian Beam), to develop the code to obtain the spatio-temporal imaging of the beam from the sensor output. (\textit{data collection and analysis})
+\item Use the Ti:Sapphire laser to adjust the setup with a high quality camera. (\textit{system setup})
+\item Characterize the \SI{3.5}{\fs} ultrashort laser pulse of the Ti:Sapphire laser with the interferometer built and the algorithms developed so far. (\textit{data collection and analysis})
 \end{enumerate}
-
-\section*{Reading material}
-\begin{itemize}
-\item Walmsley, Ian A., and Christophe Dorrer. "Characterization of ultrashort electromagnetic pulses." Advances in Optics and Photonics 1.2 (2009): 308-437.
-\item Witting, Tobias, et al. "Characterization of high-intensity sub-4-fs laser pulses using spatially encoded spectral shearing interferometry." Optics letters 36.9 (2011): 1680-1682.
-\item Miranda, Miguel, et al. "Spatiotemporal characterization of ultrashort laser pulses using spatially resolved Fourier transform spectrometry." Optics letters 39.17 (2014): 5142-5145.
-\item Trebino, Rick, and Daniel J. Kane. "Using phase retrieval to measure the intensity and phase of ultrashort pulses: frequency-resolved optical gating." JOSA A 10.5 (1993): 1101-1111.
-\end{itemize}
-
-%\begin{thebibliography}{9}
-%\bibitem{miranda} Miranda, Miguel, et al. "Spatiotemporal characterization of ultrashort laser pulses using spatially resolved Fourier transform spectrometry." Optics letters 39.17 (2014): 5142-5145.
-%\end{thebibliography}
+Note: the second point may be carried forward before, after or at the same time of the third point, depending on the availability of the Ti:Sapphire laser.
 
 \end{document}
