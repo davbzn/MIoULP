@@ -1,0 +1,194 @@
+\documentclass[11pt]{beamer}
+\usetheme{Pittsburgh}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\usepackage{parcolumns}
+\usepackage{siunitx}
+
+\author{Davide Bazzanella}
+\title{Multidimensional Imaging of Ultrafast Laser Pulses}
+%\setbeamercovered{transparent} 
+\setbeamertemplate{navigation symbols}{} 
+%\logo{} 
+\institute{Imperial College London} 
+\date{16$^{\mathrm{th}}$ March 2016} 
+\subject{}
+
+\defbeamertemplate*{title page}{customized}[1][]
+{
+\includegraphics[height=0.8cm]{Imperial_2_Pantones.eps}\\
+\begin{center}
+  \usebeamerfont{institute}\insertinstitute\par
+  \bigskip
+ {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}\par
+  \bigskip
+  \bigskip
+  \bigskip
+  {\usebeamerfont{date}}\insertdate\par
+  \bigskip
+  \bigskip
+\begin{parcolumns}{3}
+   \colchunk[1]{Assessor:\\ \textbf{John Tisch}}
+   \colchunk[2]{Supervisor:\\ \textbf{Tobias Witting}}
+   \colchunk[3]{Student:\\ \textbf{Davide Bazzanella}}
+\end{parcolumns}
+\end{center}
+}
+
+%\setbeamertemplate{title page}
+%{
+%	\vbox{}
+%	\vfill
+%	\begin{centering}
+%		{\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}
+%		\vskip0.2em
+%		{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle}
+%		\vskip2em\par
+%		\small\insertauthor\par
+%		\vskip0.7em\par
+%		\tiny\insertdate\vskip1em\par
+%	\end{centering}
+%% 	\vfill
+%}
+
+
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Outline}
+\tableofcontents
+\end{frame}
+
+\section{Introduction}
+\begin{frame}{Introduction}
+\textbf{Aim}:\\
+	measure the 3D spatial profile of an ultrafast laser pulse
+	
+	\vspace{5pt}
+\textbf{Challenge}:\\
+	short duration of laser pulses, down to few femtoseconds ($\SI{1e-15}{\s}$)
+\end{frame}
+
+\begin{frame}
+
+\textbf{Aim}:\\
+	
+	\vspace{5pt}
+\textbf{Challenge}:\\
+	
+There are already some developed techniques such as FROG and SPIDER, and their variations (e.g. SEA-SPIDER).
+
+\end{frame}
+
+\section{Self-Coherence Interferometry}
+\begin{frame}{Self-Coherence Interferometry}
+
+\end{frame}
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\documentclass[11pt, leqno]{beamer}
+%\usetheme{Dresden}
+%\usepackage[utf8]{inputenc}
+%\usepackage[english]{babel}
+%\usepackage{amsmath}
+%\usepackage{amsfonts}
+%\usepackage{amssymb}
+%\usepackage{graphicx}
+%\usepackage[compatibility=false]{caption}
+%\usepackage{subcaption}
+%\usepackage{multicol}
+%
+%\usepackage{siunitx}
+%\usepackage{wrapfig}
+%%\usepackage{float}
+%
+%\usepackage{caption}
+%\usepackage{subcaption}
+%
+%\usepackage{parcolumns}
+%\usepackage{amsthm}
+%\usepackage{sidecap}
+%\usepackage{physics}
+%
+%\usepackage{multirow}
+%\usepackage{array}
+%
+%\defbeamertemplate*{title page}{customized}[1][]
+%{
+%\begin{center}
+%  \includegraphics[height=2.3cm]{unitn_logo}\\
+%  \usebeamerfont{institute}\insertinstitute\par
+%  \bigskip
+% {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}\par
+%  \bigskip
+%  \bigskip
+%  \bigskip
+%  {\usebeamerfont{date}}\insertdate\par
+%  \bigskip
+%  \bigskip
+%\begin{parcolumns}{2}
+%   \colchunk{Thesis Advisor:\\ \textbf{Lorenzo Pavesi}\\ \textbf{Mattia Mancinelli}}
+%   \colchunk[2]{Student:\\ \textbf{Davide Bazzanella}}
+%\end{parcolumns}
+%\end{center}
+%}
+%
+%\author{Davide Bazzanella}
+%\title{Thermal tuning of phase-matching in a multimodal SOI waveguide with $\chi^{(3)}$ non linearity}
+%\date{28 settembre 2015} 
+%%\textsc{\LARGE \textbf{DEPARTMENT OF PHYSICS}}\\[0.5cm]
+%%\textsc{\LARGE \textbf{DEGREE IN PHYSICS – LAUREA IN FISICA}}\\[2.5cm]
+%%\textsc{\Large THESIS}\\[1.3cm]
+%
+%
+%
+%%\setbeamercovered{transparent} 
+%\setbeamertemplate{navigation symbols}{} 
+%%\logo{} 
+%%\institute{} 
+%%\subject{} 
+%
+%\usepackage{lmodern}
+%\newcommand{\frameofframes}{/}
+%\newcommand{\setframeofframes}[1]{\renewcommand{\frameofframes}{#1}}
+%
+%\setframeofframes{of}
+%\makeatletter
+%\setbeamertemplate{footline}
+%  {%
+%    \begin{beamercolorbox}[colsep=1.5pt]{upper separation line foot}
+%    \end{beamercolorbox}
+%    \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+%      leftskip=.3cm,rightskip=.3cm plus1fil]{author in head/foot}%
+%      \leavevmode{\usebeamerfont{author in head/foot}\insertshortauthor}%
+%      \hfill%
+%      {\usebeamerfont{institute in head/foot}\usebeamercolor[fg]{institute in head/foot}\insertshortinstitute}%
+%    \end{beamercolorbox}%
+%    \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+%      leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+%      {\usebeamerfont{title in head/foot}\insertshorttitle}%
+%      \hfill%
+%      {\usebeamerfont{frame number}\usebeamercolor[fg]{frame number}\insertframenumber~\frameofframes~\inserttotalframenumber}
+%    \end{beamercolorbox}%
+%    \begin{beamercolorbox}[colsep=1.5pt]{lower separation line foot}
+%    \end{beamercolorbox}
+%  }
+%\makeatother
+%
+%\begin{document}
+%ciao 
+%%\frame{\titlepage}
+%
+%\end{document}
