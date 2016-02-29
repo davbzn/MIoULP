@@ -1,6 +1,3 @@
-%% change filepath
-cd(fileparts(mfilename('fullpath')));
-no
 %% import data
 
 [ans1, ans2] = uigetfile({'../data/*.mat'});  % choose file to load
@@ -9,6 +6,9 @@ setting.data_file   = strcat(ans2,ans1);         % filepath of the data file
 load(setting.data_file)
 
 clear ans ans1 ans2
+
+%%
+no
 
 %% set constants
 c_const     = 299792458;                        % m/s
@@ -65,7 +65,7 @@ plot(fr0, unwrap(squeeze(angle(im_w(300,400,:)))))
 w       = gausswin(w_points, 16);                               % generate gaussian with FWHM 16
 w       = circshift(w,floor(0.47e15/max(fr0)*w_points/2));      % shift the gaussian to the left
                                                                 % at f= 4.7*1e14 Hz (633nm)
-w2 = reshape(w, [1,1,256]);
+w2 = reshape(w, [1,1,w_points]);
 
 %{
 % generate heaviside mask
