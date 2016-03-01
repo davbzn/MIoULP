@@ -21,22 +21,25 @@
 
 \defbeamertemplate*{title page}{customized}[1][]
 {
-\includegraphics[height=0.8cm]{Imperial_2_Pantones.eps}\\
+\vspace{-16pt}
+\hspace{-18pt}\includegraphics[height=0.8cm]{Imperial_2_Pantones.eps}\\
+\bigskip
+\bigskip
 \begin{center}
-  \usebeamerfont{institute}\insertinstitute\par
-  \bigskip
- {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}\par
-  \bigskip
-  \bigskip
-  \bigskip
-  {\usebeamerfont{date}}\insertdate\par
-  \bigskip
-  \bigskip
-\begin{parcolumns}{3}
-   \colchunk[1]{Assessor:\\ \textbf{John Tisch}}
-   \colchunk[2]{Supervisor:\\ \textbf{Tobias Witting}}
-   \colchunk[3]{Student:\\ \textbf{Davide Bazzanella}}
-\end{parcolumns}
+	{\usebeamerfont{institute}\insertinstitute}\par
+	\bigskip
+ 	{\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}\par
+	\bigskip
+	\bigskip
+	\bigskip
+	{\usebeamerfont{date}\insertdate}\par
+	\bigskip
+	\bigskip
+	\begin{parcolumns}{3}
+		\colchunk[1]{Assessor:\\ \textbf{John Tisch}}
+		\colchunk[2]{Supervisor:\\ \textbf{Tobias Witting}}
+		\colchunk[3]{Student:\\ \textbf{Davide Bazzanella}}
+	\end{parcolumns}
 \end{center}
 }
 
@@ -56,8 +59,6 @@
 %% 	\vfill
 %}
 
-
-
 \begin{document}
 
 \begin{frame}
@@ -73,17 +74,16 @@
 \textbf{Aim}:\\
 	measure the 3D spatial profile of an ultrafast laser pulse
 	
-	\vspace{5pt}
+	\vspace{15pt}
 \textbf{Challenge}:\\
-	short duration of laser pulses, down to few femtoseconds ($\SI{1e-15}{\s}$)
+	short duration of laser pulses, down to few femtoseconds ($\SI{e-15}{\s}$)
 \end{frame}
 
 \begin{frame}
 
-\textbf{Aim}:\\
-	
-	\vspace{5pt}
-\textbf{Challenge}:\\
+\textbf{Our target}:\\
+
+\textbf{Our target}:\\
 	
 There are already some developed techniques such as FROG and SPIDER, and their variations (e.g. SEA-SPIDER).
 
@@ -91,7 +91,39 @@ There are already some developed techniques such as FROG and SPIDER, and their v
 
 \section{Self-Coherence Interferometry}
 \begin{frame}{Self-Coherence Interferometry}
+Studies the interference between a wave and a copy of itself with a certain delay.
 
+May be achieved with the use of a Mach-Zender interferometer
+\end{frame}
+
+\section{Setup}
+\begin{frame}{Mach-Zender Interferometer}
+
+\end{frame}
+\section{Data Analysis}
+\begin{frame}{Fourier Transform Spectrometry}
+\begin{itemize}
+	\item acquire $I(x,y,\tau.)$ at different $\tau.$ delays.
+	\item apply Fourier transform to $I(x.,y.,\tau)$ for every pixel $(x.,y.)$, obtaining $\tilde{I}(x.,y.,\omega)$.
+	\item isolate the interference pattern (remove constant values).
+	\item apply the inverse Fourier transform to $\tilde{I}(x.,y.,\omega)$, obtaining $I_{pulse}(x.,y.,\tau)$ for every pixel $(x.,y.)$.
+\end{itemize}
+
+\end{frame}
+\section{Results}
+\begin{frame}{Results for the Ti:S laser}
+
+\end{frame}
+\section{Conclusion}
+\begin{frame}{Conclusion}
+\textbf{Improvements}:\\
+	\begin{itemize}
+		\item Use of corner cube retroreflectors
+		\item Use of piezo stage for better sampling
+	\end{itemize}
+	
+	\vspace{5pt}
+\textbf{Summary}:\\
 \end{frame}
 
 \end{document}
