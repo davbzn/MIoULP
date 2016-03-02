@@ -12,10 +12,11 @@ c_const     = 299792458;                                % m/s
 data.file(1).str    = strcat(ans2,ans1);                            % filepath of the data file
 
 % get location for data with lens
-data.nr_lens = 1;
+data.nr_lens = 3;
 for d=1:data.nr_lens
-    [ans1, ans2] = uigetfile({'../data/*.mat'});                            % choose file to load
-    data.file(1+data.nr_lens).str    = strcat(ans2,ans1);        % filepath of the data file
+    [ans1, ans2]        = uigetfile({'../data/*.mat'});                            % choose file to load
+    data.file(1+d).str  = strcat(ans2,ans1);        % filepath of the data file
+    
 end
 
 clear ans ans1 ans2
@@ -71,8 +72,7 @@ for d=1:data.nr_lens+1
         s   = squeeze((angle(im_t(:,:,delay))));
         
         % unwrap the center line along the horizontal axis
-        %sh  = unwrap( s( ceil(lv/2), :) );
-        sh  = unwrap( s( , :) );
+        sh  = unwrap( s( ceil(lv/2), :) );
         ph = polyfit(1:lh, sh, 2);
         
         sv  = unwrap( s( :, ceil(lh/2) ) );
@@ -111,33 +111,17 @@ pp      = 2.2e-3; % 2.2um = 2.2e-3 mm % pixel pitch
 ppv     = pp*4;
 pph     = pp*4;
 conv    = 0.633e-3/(2*pi); % wavelength/2*pi % conversion factor
+Lens    = 1+3;
 
 % evaluation point
 evpv    = (lv/2+1)*pp;
 evph    = (lh/2+1)*pp;
-%{
-% create derivatives...
-fdh     = conv*(2*evph/pph^2*(coeff(:,1,2)/nglass-coeff(:,1,1)/nair)+1/pph*(coeff(:,2,2)/nglass-coeff(:,2,1)/nair));
-fdv     = conv*(2*evpv/ppv^2*(coeff(:,4,2)/nglass-coeff(:,4,1)/nair)+1/ppv*(coeff(:,5,2)/nglass-coeff(:,5,1)/nair));
-sdh     = conv*(2/pph^2*(coeff(:,1,2)/nglass-coeff(:,1,1)/nair) );
-sdv     = conv*(2/ppv^2*(coeff(:,4,2)/nglass-coeff(:,5,1)/nair) );
-
-radius = zeros(arm.N, 2);
-radius(:,1) = (abs( 1 + fdh.^2 )).^(1.5) ./ abs( sdh );
-%radius(:,1) = ( abs(1 + conv^2.*(2*Dah/pp^2*evph+Dbh/pp).^2) ).^(3/2) ./abs(2*Dah/(pp^2)*conv);
-%(abs(1+(coeff(:,2,1)-coeff(:,2,2)).^2)).^(1.5)./abs(coeff(:,1,1)-coeff(:,1,2));
-
-radius(:,2) = (abs( 1 + fdv.^2 )).^(1.5) ./ abs( sdv );
-%radius(:,2) = ( abs(1 + conv^2.*(2*Dav/pp^2*evpv+Dbv/pp).^2) ).^(3/2) ./abs(2*Dav/(pp^2)*conv);
-%radius(:,2) =
-%(abs(1+(coeff(:,5,1)-coeff(:,5,2)).^2)).^(1.5)./abs(coeff(:,4,1)-coeff(:,4,2));
-%}
 
 % create derivatives
-fdh     = conv/(nglass-nair)*(2/pph^2 * evph * (coeff(:,1,2)-coeff(:,1,1)) + (coeff(:,2,2)-coeff(:,2,1))/pph );
-fdv     = conv/(nglass-nair)*(2/ppv^2 * evpv * (coeff(:,4,2)-coeff(:,4,1)) + (coeff(:,5,2)-coeff(:,5,1))/ppv );
-sdh     = conv/(nglass-nair)*(2/pph^2 * (coeff(:,1,2)-coeff(:,1,1)) );
-sdv     = conv/(nglass-nair)*(2/ppv^2 * (coeff(:,4,2)-coeff(:,5,1)) );
+fdh     = conv/(nglass-2*nair)*(2/pph^2 * evph * (coeff(:,1,Lens)-coeff(:,1,1)) + (coeff(:,2,Lens)-coeff(:,2,1))/pph );
+fdv     = conv/(nglass-2*nair)*(2/ppv^2 * evpv * (coeff(:,4,Lens)-coeff(:,4,1)) + (coeff(:,5,Lens)-coeff(:,5,1))/ppv );
+sdh     = conv/(nglass-2*nair)*(2/pph^2 * (coeff(:,1,Lens)-coeff(:,1,1)) );
+sdv     = conv/(nglass-2*nair)*(2/ppv^2 * (coeff(:,4,Lens)-coeff(:,5,1)) );
 
 radius = zeros(arm.N, 2);
 % horizontal
