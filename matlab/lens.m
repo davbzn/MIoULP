@@ -9,34 +9,34 @@ c_const     = 299792458;                                % m/s
 
 % get location for data without lens
 [ans1, ans2] = uigetfile({'../data/*.mat'});                                % choose file to load
-sett.data_file(1).str    = strcat(ans2,ans1);                            % filepath of the data file
+data.file(1).str    = strcat(ans2,ans1);                            % filepath of the data file
 
 % get location for data with lens
-sett.nr_lens = 1;
-for d=1:sett.nr_lens
+data.nr_lens = 1;
+for d=1:data.nr_lens
     [ans1, ans2] = uigetfile({'../data/*.mat'});                            % choose file to load
-    sett.data_file(1+sett.nr_lens).str    = strcat(ans2,ans1);        % filepath of the data file
+    data.file(1+data.nr_lens).str    = strcat(ans2,ans1);        % filepath of the data file
 end
 
 clear ans ans1 ans2
 
 %% load and elaborate data
 
-for d=1:sett.nr_lens+1
+for d=1:data.nr_lens+1
     %% load data
     
-    load(sett.data_file(d).str)
+    load(data.file(d).str)
     
     if d==1
         % allocate memory to get coefficients
-        coeff = zeros(arm.N,6,sett.nr_lens+1);
+        coeff = zeros(arm.N, 6, data.nr_lens + 1);
     end
     %% define or evaluate some values
     
     % number of frequency points is next power of 2
     ax.NF          = pow2( nextpow2(arm.N) );                  % number of points in the frequency domain
     arm.step_0  = mean(diff(arm.vect_0));
-    axdtau        = arm.step_0*0.001/c_const;                 % mm*(m/mm)/(m/s) = s
+    ax.dtau        = arm.step_0*0.001/c_const;                 % mm*(m/mm)/(m/s) = s
     ax.max_f       = (0.5-1/ax.NF)/ax.dtau;                       % maximum frequency
     
     %% FFT on data
@@ -71,10 +71,11 @@ for d=1:sett.nr_lens+1
         s   = squeeze((angle(im_t(:,:,delay))));
         
         % unwrap the center line along the horizontal axis
-        sh  = unwrap( s( lv/2+1, :) );
+        %sh  = unwrap( s( ceil(lv/2), :) );
+        sh  = unwrap( s( , :) );
         ph = polyfit(1:lh, sh, 2);
         
-        sv  = unwrap( s( :, lh/2+1) );
+        sv  = unwrap( s( :, ceil(lh/2) ) );
         pv = polyfit(1:lv, sv', 2);
         
         % save coefficient in variable
@@ -106,9 +107,9 @@ clear d
 %% evaluate radius
 nglass  = 1.5151; % from refractive.info
 nair    = 1;
-pp      = 2.8e-3; % 2.8um = 2.8e-3 mm % pixel pitch
-ppv     = pp*1.2;
-pph     = pp*1.6;
+pp      = 2.2e-3; % 2.2um = 2.2e-3 mm % pixel pitch
+ppv     = pp*4;
+pph     = pp*4;
 conv    = 0.633e-3/(2*pi); % wavelength/2*pi % conversion factor
 
 % evaluation point
@@ -143,6 +144,8 @@ radius = zeros(arm.N, 2);
 radius(:,1) = (abs( 1 + fdh.^2 )).^(1.5) ./ abs( sdh );
 % vertical
 radius(:,2) = (abs( 1 + fdv.^2 )).^(1.5) ./ abs( sdv );
+
+clear fdh dfv sdh sdv evpv evph conv ppv pph pp nair nglass
 
 %% plot radii of curvature
 figure

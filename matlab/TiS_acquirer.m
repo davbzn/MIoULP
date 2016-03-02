@@ -11,6 +11,11 @@ if 0
     set(wc.processor.flatten_colour,'Value',1);
 else
     wc = CameraViewerStd('GENTL.Controller','ImageViewerStd',figure,'GENTL (AVT) Viewer');
+    
+    %% set binning
+    wc.processor.binning.binx.Value = 4;
+    wc.processor.binning.biny.Value = 4;
+    set(wc.processor.binning.do,'Value',1)
 end
 
 %% take image for testing
@@ -23,9 +28,8 @@ if 0
     figureNF('image');clf
     imagesc(x,y,im)
 end
-%%
 
-%% define settings parameters and values
+%% define settings, parameters and values
 
 % general settings
 sett.pic_size   = size(wc.camera.take_snapshot);
@@ -34,14 +38,14 @@ sett.N_pic      = 3;                                   % number of pictures
 sett.x          = wc.processor.x;
 sett.y          = wc.processor.y;
 
-% attuator parameters
-att.center      = 20;                                   % mm
-att.step_min    = 47.625e-6;                            % nm*10^-6 = mm
+% actuator parameters
+att.center      = 14.2;                                   % mm
+att.step_min    = 0.047625/1000;                        % um/1000 = mm
 att.step        = att.step_min;                         % mm
-att.N           = pow2(6); % step number as power of 2: 8 --> 256; 9 --> 512
+att.N           = pow2(8); % step number as power of 2: 8 --> 256; 9 --> 512
 att.min         = att.center -  att.N   *att.step/2;    % mm
 att.max         = att.center + (att.N-1)*att.step/2;    % mm
-att.vect        = [att.min:att.step:att.max];           % mm
+att.vect        = att.min:att.step:att.max;             % mm
 att.vect_read   = [];
 
 % arm parameters
@@ -51,7 +55,7 @@ arm.step        = 2*att.step;                           % mm
 arm.N           = att.N;    % step number
 arm.min         = arm.center -  arm.N   *arm.step/2;    % mm from the center
 arm.max         = arm.center + (arm.N-1)*arm.step/2;    % mm from the center
-arm.vect        = [arm.min:arm.step:arm.max];           % mm
+arm.vect        = arm.min:arm.step:arm.max;             % mm
 arm.vect_read   = [];
 
 % prepare variables for processed images (grayscale)

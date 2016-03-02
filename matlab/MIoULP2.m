@@ -109,22 +109,20 @@ clear im_fmod   % not sure about this part,
 % define fittype
 ft = fittype( 'poly22' );
 % prepare arrays for fit
-[xx, yy]    = meshgrid( (1:sett.processed(1))', 1:sett.processed(2));
+%[xx, yy]    = meshgrid( (1:sett.processed(1))', 1:sett.processed(2));
+[xx, yy]    = meshgrid( sett.x, sett.y);
 
+%figure
 for n=1:arm.N
     
     s = squeeze((angle(im_t(:,:,n))));
-    % unwrap a row at the center
-    s(ax.cv, :) = unwrap( s(ax.cv, :) );
-    % set center to 0
-    s(ax.cv, :) = s(ax.cv, :) - s(ax.cv, ax.ch);
-    % unwrap in the other direction
-    s(ax.cv:end, ax.ch) = unwrap(s(ax.cv:end, ax.ch), [], 1);
-    s(ax.cv:end, ax.ch) = flip( unwrap( flip(s(1:ax.cv, ax.ch),1), [], 1), 1);
+
     s = unwrap(s,[],1);
     s = unwrap(s,[],2);
     
     [ph(n).fit, ph(n).gof]   = fit([xx(:), yy(:)], s(:), ft);
+    
+    n
 end
 
 clear xx yy ft s n
