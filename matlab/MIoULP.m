@@ -62,10 +62,11 @@ plot(fr0, unwrap(squeeze(angle(im_w(300,400,:)))))
 %% remove reference w/ gaussian
 
 % generate gaussian mask
-w       = gausswin(w_points, 16);                               % generate gaussian with FWHM 16
-w       = circshift(w,floor(0.47e15/max(fr0)*w_points/2));      % shift the gaussian to the left
-                                                                % at f= 4.7*1e14 Hz (633nm)
-w2 = reshape(w, [1,1,256]);
+w       = gausswin(w_points, 18);                               % generate gaussian with FWHM 16
+% shift the gaussian to the left
+w       = circshift(w,floor(0.40e15/max(fr0)*w_points/2));      % at f= 4.0*1e14 Hz (750nm)
+%w       = circshift(w,floor(0.47e15/max(fr0)*w_points/2));      % at f= 4.7*1e14 Hz (633nm)
+w2 = reshape(w, [1,1,w_points]);
 
 %{
 % generate heaviside mask

@@ -9,50 +9,50 @@ c_const     = 299792458;                                % m/s
 
 % get location for data without lens
 [ans1, ans2] = uigetfile({'../data/*.mat'});                                % choose file to load
-setting.data_file(1).str    = strcat(ans2,ans1);                            % filepath of the data file
+sett.data_file(1).str    = strcat(ans2,ans1);                            % filepath of the data file
 
 % get location for data with lens
-setting.nr_lens = 1;
-for d=1:setting.nr_lens
+sett.nr_lens = 1;
+for d=1:sett.nr_lens
     [ans1, ans2] = uigetfile({'../data/*.mat'});                            % choose file to load
-    setting.data_file(1+setting.nr_lens).str    = strcat(ans2,ans1);        % filepath of the data file
+    sett.data_file(1+sett.nr_lens).str    = strcat(ans2,ans1);        % filepath of the data file
 end
 
 clear ans ans1 ans2
 
 %% load and elaborate data
 
-for d=1:setting.nr_lens+1
+for d=1:sett.nr_lens+1
     %% load data
     
-    load(setting.data_file(d).str)
+    load(sett.data_file(d).str)
     
     if d==1
         % allocate memory to get coefficients
-        coeff = zeros(arm.N,6,setting.nr_lens+1);
+        coeff = zeros(arm.N,6,sett.nr_lens+1);
     end
     %% define or evaluate some values
     
     % number of frequency points is next power of 2
-    f_points    = pow2( nextpow2(arm.N) );
+    ax.NF          = pow2( nextpow2(arm.N) );                  % number of points in the frequency domain
     arm.step_0  = mean(diff(arm.vect_0));
-    dtau        = arm.step_0*0.001/c_const;                     % mm*(m/mm)/(m/s) = s
-    max_f       = 0.5/dtau-1/f_points/dtau;                     % maximum frequency
+    axdtau        = arm.step_0*0.001/c_const;                 % mm*(m/mm)/(m/s) = s
+    ax.max_f       = (0.5-1/ax.NF)/ax.dtau;                       % maximum frequency
     
     %% FFT on data
 
-    im_f = fftshift( fft(im_all, f_points, 3 ) );               % fft, trying the whole 3D matrix
+    im_f = fftshift( fft(im_all, ax.NF, 3 ) );                 % fft, trying the whole 3D matrix
 
 	clear im_all
     
     %% remove reference w/ gaussian
 
     % generate gaussian mask
-    g   = gausswin(f_points, 16);                               % generate gaussian with FWHM 16
-    g   = circshift(g,floor(0.47e15/max_f*f_points/2));         % shift the gaussian to the left
+    g   = gausswin(ax.NF, 16);                               % generate gaussian with FWHM 16
+    g   = circshift(g,floor(0.47e15/ax.max_f*ax.NF/2));         % shift the gaussian to the left
                                                                 % at f= 4.7*1e14 Hz (633nm)
     % modulate the spectrum
-    g   = reshape(g, [1,1,f_points]);                           % reshape to use bsxfun
+    g   = reshape(g, [1,1,ax.NF]);                           % reshape to use bsxfun
     im_fmod = bsxfun(@times,im_f, g);
     clear im_f g
     
