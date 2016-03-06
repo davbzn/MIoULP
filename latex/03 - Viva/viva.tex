@@ -10,6 +10,10 @@
 \usepackage{parcolumns}
 \usepackage{siunitx}
 
+\usepackage{pstricks}
+\usepackage{pst-optexp}
+\usepackage{xkeyval}
+
 \author{Davide Bazzanella}
 \title{Multidimensional Imaging of Ultrafast Laser Pulses}
 %\setbeamercovered{transparent} 
@@ -21,15 +25,17 @@
 
 \defbeamertemplate*{title page}{customized}[1][]
 {
-\vspace{-16pt}
+\vspace{-06pt}
 \hspace{-18pt}\includegraphics[height=0.8cm]{Imperial_2_Pantones.eps}\\
 \bigskip
-\bigskip
 \begin{center}
-	{\usebeamerfont{institute}\insertinstitute}\par
+	{
+	\usebeamerfont{title}\insertinstitute}\par
+	\bigskip
+	\bigskip
+	{BSc 3rd Year Project}\par
 	\bigskip
  	{\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}\par
-	\bigskip
 	\bigskip
 	\bigskip
 	{\usebeamerfont{date}\insertdate}\par
@@ -73,39 +79,107 @@
 \begin{frame}{Introduction}
 \textbf{Aim}:\\
 	measure the 3D spatial profile of an ultrafast laser pulse
-	
+
 	\vspace{15pt}
 \textbf{Challenge}:\\
 	short duration of laser pulses, down to few femtoseconds ($\SI{e-15}{\s}$)
+	
+	\vspace{15pt}
+\textbf{Method}:\\
+	direct measurement of the E-field is impossible,
+	measure intensity averaged on many pulses
 \end{frame}
 
 \begin{frame}
 
-\textbf{Our target}:\\
+\textbf{Techniques availables}:\\
+\begin{itemize}
+\item Spectrography
+\begin{itemize}
+\item Frequency-Resolved Optical Gating (FROG and variations)
+\end{itemize}
+\item Interferometry
+\begin{itemize}
+\item Spectral Phase Interferometry for Direct Electric field Reconstruction (SPIDER and variations).
+\item Fourier-Transform Interferometry
+\end{itemize}
+\end{itemize}	
+%There are already some developed techniques such as FROG and SPIDER, and their variations (e.g. SEA-SPIDER).
 
 \textbf{Our target}:\\
-	
-There are already some developed techniques such as FROG and SPIDER, and their variations (e.g. SEA-SPIDER).
+Combined use of Fourier-Transform Interferometry and SEA-SPIDER.
+
 
 \end{frame}
 
 \section{Self-Coherence Interferometry}
 \begin{frame}{Self-Coherence Interferometry}
-Studies the interference between a wave and a copy of itself with a certain delay.
 
-May be achieved with the use of a Mach-Zender interferometer
+\begin{parcolumns}{2}
+	\colchunk[1]{
+		Studies the interference between a wave and a copy of itself with a certain delay.
+
+%		\vspace{100pt}
+		May be achieved with the use of a Mach-Zender interferometer
+	}
+	\colchunk[2]{
+		image
+	}
+\end{parcolumns}
 \end{frame}
+
+%\section{Setup}
+%\begin{frame}{Mach-Zender Interferometer}
+%\begin{figure}
+%	\includegraphics[scale=1]{text6260-83.png}
+%\end{figure}
+%\end{frame}
 
 \section{Setup}
 \begin{frame}{Mach-Zender Interferometer}
-
+\begin{center}
+\begin{pspicture}(10,7)
+	\pnodes(0,6){IN}(10,3){OUT}
+	\pnodes(1,6){BSA}(5.5,3){BSB}
+	\pnodes(1,1){C}(2.5,1){D}(2.5,3){E}(4.5,3){Focus}
+	\pnodes(8,6){G}(8,4.5){H}(5.5,4.5){I}
+	
+	\addtopsstyle{OptComp}{mirrorwidth=1.5, mirrortype=extended}
+	\addtopsstyle{OptComp}{bssize=1, bsstyle=plate}
+	\addtopsstyle{Beam}{fillstyle=solid, fillcolor=red!50!white, linecolor=red, opacity=0.2}
+	
+	\beamsplitter(IN)(BSA)(C){BS1}
+	
+	\mirror(BSA)(C)(D){M1}
+	\mirror(C)(D)(E){M2}
+	\oapmirror[oapmirroraperture=1.5](D)(E)(Focus){OAP}
+	\pinhole[outerheight=1,innerheight=0.1,phlinewidth=0.1](Focus)(Focus){PH}
+	
+	\beamsplitter(I)(BSB)(OUT){BS1}
+	
+	\mirror(BSA)(G)(H){M3}
+	\mirror(G)(H)(I){M4}
+	\mirror(H)(I)(BSB){M5}
+	
+	\drawwidebeam[beamwidth=0.4](IN){1-6}(OUT)
+	\drawwidebeam[beamwidth=0.4](IN)(BSA){7-9}{6}(OUT)
+	
+	\pnode(11,7){Z}
+	\optbox[optboxsize=1.6 3.1](7,5.25)(9.2,5.25)
+	\rput[r](9.65,5.5){$\tau$\psline[arrows=<->](-0.65, -0.15)(0.35, -0.15)}
+	
+\end{pspicture}
+\end{center}
 \end{frame}
+
 \section{Data Analysis}
 \begin{frame}{Fourier Transform Spectrometry}
+% replace with block diagram
 \begin{itemize}
 	\item acquire $I(x,y,\tau.)$ at different $\tau.$ delays.
 	\item apply Fourier transform to $I(x.,y.,\tau)$ for every pixel $(x.,y.)$, obtaining $\tilde{I}(x.,y.,\omega)$.
 	\item isolate the interference pattern (remove constant values).
+	\item multiply reference phase (pinhole) as function of $\phi(x,y,\omega)$
 	\item apply the inverse Fourier transform to $\tilde{I}(x.,y.,\omega)$, obtaining $I_{pulse}(x.,y.,\tau)$ for every pixel $(x.,y.)$.
 \end{itemize}
 
@@ -118,7 +192,7 @@ May be achieved with the use of a Mach-Zender interferometer
 \begin{frame}{Conclusion}
 \textbf{Improvements}:\\
 	\begin{itemize}
-		\item Use of corner cube retroreflectors
+		\item Use of corner cube retroreflectors (CCR) for better alignment
 		\item Use of piezo stage for better sampling
 	\end{itemize}
 	
