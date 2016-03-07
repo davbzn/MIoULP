@@ -37,6 +37,8 @@ sett.processed  = size(wc.processor.image);
 sett.N_pic      = 3;                                   % number of pictures
 sett.x          = wc.processor.x;
 sett.y          = wc.processor.y;
+%sett.binx       = wc.processor.binning.binx.Value;
+%sett.biny       = wc.processor.binning.biny.Value;
 
 % actuator parameters
 att.center      = 14.2;                                   % mm
@@ -76,7 +78,8 @@ pause(0.5);
 att.vect_read(1) = z.get_position(2,'mm');
 arm.vect_read(1) = 0;
 
-for j=1:10
+% take sett.N_pic photos to average
+for j=1:sett.N_pic
     wc.camera.take_snapshot;
     im_store(:,:,j) = wc.processor.image;
 end
@@ -91,7 +94,7 @@ for n=2:att.N
     arm.vect_read(n) = 2*(att.vect_read(n) - att.vect_read(n-1)) + arm.vect_read(n-1);
 
     % take sett.N_pic photos to average
-    for j=1:10
+    for j=1:sett.N_pic
         wc.camera.take_snapshot;
         im_store(:,:,j) = wc.processor.image;
     end

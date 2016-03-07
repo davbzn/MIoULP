@@ -33,8 +33,7 @@ ax.tau      = arm.vect_0*0.001/c_const;                 % mm*(m/mm)/(m/s) = s
 ax.dtau     = arm.step_0*0.001/c_const;                 % mm*(m/mm)/(m/s) = s
 
 % define coordinates for a dummy point
-% in this case is at the center of the sensor
-ax.v        = ceil(sett.processed(1)/2);
+ax.v        = ceil(sett.processed(1)/2); %center of the vertical axis
 ax.h        = 120;%ceil(sett.processed(2)/2);
 % define coordinates for the pixel at the center
 ax.cv       = ceil(sett.processed(1)/2);
@@ -125,6 +124,8 @@ if sett.graph
     
     clear figure1 axes1
 end
+
+%% save file
 
 %% add spherical wave phase
 
