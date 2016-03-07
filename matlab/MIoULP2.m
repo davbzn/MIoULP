@@ -126,8 +126,7 @@ if sett.graph
 end
 
 %% save file
-
-%% add spherical wave phase
+im_fmod_save = im_fmod;                                     % save data for later
 
 %% inverse FFT
 im_t    = ifft( ifftshift(im_fmod, 3), arm.N, 3 );
@@ -144,6 +143,7 @@ ft = fittype( 'poly22' );
 % prepare arrays for fit
 s = squeeze((angle(im_t(:,:,1))));
 [xData, yData, zData] = prepareSurfaceData( sett.x, sett.y, s );
+%[xData, yData, zData] = prepareSurfaceData( (1:processed(1))', (1:processed(2)), s );
 clear zData
 
 coeff = zeros(arm.N, 6);
@@ -183,7 +183,44 @@ end
 clear xData yData
 clear xx yy ft s n
 
-figure
-plot(coeff(:,4));
-hold on;
-plot(coeff(:,6));
+if sett.graph
+    figure
+    plot(coeff(:,4));
+    hold on;
+    plot(coeff(:,6));
+end
+
+%% add spectral phase
+% get spectral phase file
+[ans1, ans2] = uigetfile({'../data/*.mat'});  % choose file to load
+sett.data_file   = strcat(ans2,ans1);         % filepath of the data file
+
+load(sett.data_file)
+
+clear ans ans1 ans2
+
+% add phase to im_fmod_save
+
+% v vector of phase
+%v       = reshape(v, [1,1,ax.NF]);
+%im_fphase = bsxfun(@times,im_f, e.^(i*v));   
+
+%clear v im_fmod_save
+
+%% add spherical wave phase
+% v vector of phase
+%v       = reshape(v, [1,1,ax.NF]);
+%im_fphase_2 = bsxfun(@times,im_fphase, v)
+
+%clear im_fphase
+
+%% inverse FFT
+im_t    = ifft( ifftshift(im_fmod, 3), arm.N, 3 );
+clear im_fmod   % not sure about this part,
+                % don't we need this as it is A_1(x,y,w) ?
+                % then we retrieve the x,y dependence of phi_r working on the phase
+                % while we retrieve the w dependence of phi_r using the SEA-SPIDER
+
+%%
+
+% some isosurface?
