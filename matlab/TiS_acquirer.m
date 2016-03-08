@@ -37,8 +37,8 @@ sett.processed  = size(wc.processor.image);
 sett.N_pic      = 3;                                   % number of pictures
 sett.x          = wc.processor.x;
 sett.y          = wc.processor.y;
-%sett.binx       = wc.processor.binning.binx.Value;
-%sett.biny       = wc.processor.binning.biny.Value;
+sett.binx       = wc.processor.binning.binx.Value;
+sett.biny       = wc.processor.binning.biny.Value;
 
 % actuator parameters
 att.center      = 14.2;                                   % mm

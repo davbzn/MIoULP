@@ -26,6 +26,9 @@ ax.f_hene = c_const/ax.wl_hene;                         % f = c/wlen = 0.4739336
 % wavelength and frequency relative to 800nm:
 ax.wl_800   = 800.0e-9;                                 % m
 ax.f_800    = c_const/ax.wl_800;                        % f = c/wlen = 0.374740572 × 10^15 Hz
+% wavelength and frequency relative to 760nm:
+ax.wl_800   = 760.0e-9;                                 % m
+ax.f_800    = c_const/ax.wl_760;                        % f = c/wlen = 0.394736842 × 10^14 Hz
 
 arm.step_0  = mean(diff(arm.vect_0));
 
@@ -70,8 +73,9 @@ end
 %% remove reference w/ gaussian
 
 % generate gaussian mask
-g       = gausswin(ax.NF, 16);                              % generate gaussian with FWHM 16
-g       = circshift(g,floor(ax.f_800/max(ax.fr0)*ax.NF/2)); % shift the gaussian to the left
+%g       = gausswin(ax.NF, 16);                             % deprecated
+g       = mygauss(1:ax.NF,16,8);% generate gaussian with FWHM 16
+g       = circshift(g,floor(ax.f_760/max(ax.fr0)*ax.NF/2)); % shift the gaussian to the left
 
 if sett.graph
     %% how does the gaussian act? Testing area
@@ -123,10 +127,7 @@ if sett.graph
     ylabel({'Intensity [a.u.]'}); 
     
     clear figure1 axes1
-end
-
-%% save file
-im_fmod_save = im_fmod;                                     % save data for later
+end                                  % save data for later
 
 %% inverse FFT
 im_t    = ifft( ifftshift(im_fmod, 3), arm.N, 3 );
@@ -142,9 +143,8 @@ clear im_fmod   % not sure about this part,
 ft = fittype( 'poly22' );
 % prepare arrays for fit
 s = squeeze((angle(im_t(:,:,1))));
-[xData, yData, zData] = prepareSurfaceData( sett.x, sett.y, s );
-%[xData, yData, zData] = prepareSurfaceData( (1:processed(1))', (1:processed(2)), s );
-clear zData
+%[xData, yData, ~] = prepareSurfaceData( sett.x, sett.y, s );
+[xData, yData, zData] = prepareSurfaceData( (1:processed(1))', (1:processed(2)), s );
 
 coeff = zeros(arm.N, 6);
 
@@ -177,7 +177,7 @@ for n=1:arm.N
         grid on
     end
 
-    n
+    n % print 'n' to undestand the progress
 end
 
 clear xData yData
@@ -190,7 +190,14 @@ if sett.graph
     plot(coeff(:,6));
 end
 
-%% add spectral phase
+%% add spherical wave phase
+A = ?;%array of phase
+A          = reshape(A, [sett.processed(1),sett.processed(2),1]);
+im_t2      = bsxfun(@times, im_t, exp(1i.*A) );
+
+%clear im_t
+
+%% add temporal phase
 % get spectral phase file
 [ans1, ans2] = uigetfile({'../data/*.mat'});  % choose file to load
 sett.data_file   = strcat(ans2,ans1);         % filepath of the data file
@@ -199,28 +206,37 @@ load(sett.data_file)
 
 clear ans ans1 ans2
 
+% interpole data to match ax.tau vector
+t_ph        = rec.ot.t';
+angE        = unwrap(2*pi*rand(2048,1)); % unwrap(angle( mean(rec.ot.Ey(:,:,:),3) ));
+ph_t        = interp1( t_ph.*1e-15, angE , ax.tau, 'linear', 0);
+
 % add phase to im_fmod_save
+ph_t        = reshape(ph_t, [1,1,ax.NF]);
+im_phased   = bsxfun(@times,im_t1, exp(1i*ph_t));   
 
-% v vector of phase
-%v       = reshape(v, [1,1,ax.NF]);
-%im_fphase = bsxfun(@times,im_f, e.^(i*v));   
+%clear v im_t1
 
-%clear v im_fmod_save
+%% isosurface plot
+% example
+[xx, yy, zz] = meshgrid(-100:100, -100:100, -100:100);
+V = exp(-(xx.^2+yy.^2+zz.^2)/1000);
+p = patch(isosurface(xx, yy, zz, V, 0.5));
+isonormals(xx,yy,zz,V, p)
+p.FaceColor = 'red';
+p.EdgeColor = 'none';
+daspect([1 1 1])
+view(3) %or" camup([1 0 0 ]); campos([25 -55 5]) "
+camlight; lighting phong
 
-%% add spherical wave phase
-% v vector of phase
-%v       = reshape(v, [1,1,ax.NF]);
-%im_fphase_2 = bsxfun(@times,im_fphase, v)
+% I     = abs(im_t3(:,:,:));
 
-%clear im_fphase
+% [xm,ym,zm] = meshgrid(sett.x,sett.y,ax.tau);
+% is = isosurface(xm,ym,zm,I, mean(mean(mean(I))) );
+% is = isosurface(xm,ym,zm,I(:,:,1:10), mean(mean(mean(I(:,:,1:10)))) );
+camlight; lighting phong
 
-%% inverse FFT
-im_t    = ifft( ifftshift(im_fmod, 3), arm.N, 3 );
-clear im_fmod   % not sure about this part,
-                % don't we need this as it is A_1(x,y,w) ?
-                % then we retrieve the x,y dependence of phi_r working on the phase
-                % while we retrieve the w dependence of phi_r using the SEA-SPIDER
-
-%%
-
-% some isosurface?
+% for n = 1:256
+% pause(1);
+% imagesc(I(:,:,n))
+% end
