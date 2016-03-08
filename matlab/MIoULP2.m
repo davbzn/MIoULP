@@ -218,25 +218,37 @@ im_phased   = bsxfun(@times,im_t1, exp(1i*ph_t));
 %clear v im_t1
 
 %% isosurface plot
-% example
-[xx, yy, zz] = meshgrid(-100:100, -100:100, -100:100);
-V = exp(-(xx.^2+yy.^2+zz.^2)/1000);
-p = patch(isosurface(xx, yy, zz, V, 0.5));
-isonormals(xx,yy,zz,V, p)
-p.FaceColor = 'red';
-p.EdgeColor = 'none';
-daspect([1 1 1])
-view(3) %or" camup([1 0 0 ]); campos([25 -55 5]) "
-camlight; lighting phong
+if 0
+    %% example
+    [xx, yy, zz] = meshgrid(-100:100, -100:100, -100:100);
+    V = exp(-(xx.^2+yy.^2+zz.^2)/1000); % just a gauss shape in 3D
+    p = patch(isosurface(xx, yy, zz, V, 0.5));
+    isonormals(xx,yy,zz,V, p)
+    p.FaceColor = 'red';
+    p.EdgeColor = 'none';
+    daspect([1 1 1])
+    view(3) %or" camup([1 0 0 ]); campos([25 -55 5]) "
+    camlight; lighting phong
+end
 
-% I     = abs(im_t3(:,:,:));
+% with real data
+if 0
+    I     = abs(im_phased(:,:,:));
+    Inorm = I./max( max( max(I)));
 
-% [xm,ym,zm] = meshgrid(sett.x,sett.y,ax.tau);
-% is = isosurface(xm,ym,zm,I, mean(mean(mean(I))) );
-% is = isosurface(xm,ym,zm,I(:,:,1:10), mean(mean(mean(I(:,:,1:10)))) );
-camlight; lighting phong
+    [xm,ym,zm] = meshgrid(sett.x,sett.y,ax.tau);
+    sett.pp     = 2.2e-6; % pixel pitch in m
+    is = patch(isosurface(xm.*pp, ym.*pp, zm.*pp, I, mean(mean(mean(I))) ) );
+    is = patch(isosurface(xm.*pp, ym.*pp, zm.*pp, I,  max( max( max(I))) ) );
+    is = patch(isosurface(xm.*pp, ym.*pp, zm.*pp, Inorm,  0.8 ) );
+    % is = isosurface(xm,ym,zm,I(:,:,1:10), mean(mean(mean(I(:,:,1:10)))) );
+    camlight; lighting phong
+end
 
-% for n = 1:256
-% pause(1);
-% imagesc(I(:,:,n))
-% end
+if 0
+    figure
+    for n = 1:1024
+        pause(1);
+        imagesc(I(:,:,n))
+    end
+end
