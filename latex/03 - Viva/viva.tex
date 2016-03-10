@@ -18,15 +18,14 @@
 \title{Multidimensional Imaging of Ultrafast Laser Pulses}
 %\setbeamercovered{transparent} 
 \setbeamertemplate{navigation symbols}{} 
-%\logo{} 
+\logo{\includegraphics[height=0.8cm]{Imperial_2_Pantones.eps}\vspace{233pt}\hspace{264pt}} 
 \institute{Imperial College London} 
 \date{16$^{\mathrm{th}}$ March 2016} 
 \subject{}
 
 \defbeamertemplate*{title page}{customized}[1][]
 {
-\vspace{-06pt}
-\hspace{-18pt}\includegraphics[height=0.8cm]{Imperial_2_Pantones.eps}\\
+\bigskip
 \bigskip
 \begin{center}
 	{
@@ -86,7 +85,7 @@
 	
 	\vspace{15pt}
 \textbf{Method}:\\
-	direct measurement of the E-field is impossible,
+	direct measurement of single pulse is impossible,
 	measure intensity averaged on many pulses
 \end{frame}
 
@@ -184,6 +183,42 @@ Combined use of Fourier-Transform Interferometry and SEA-SPIDER.
 \end{itemize}
 
 \end{frame}
+
+\begin{frame}{Fourier Transform Spectrometry}
+
+\begin{pspicture}(4,7)
+	\psset{fillstyle=solid, fillcolor=white}
+	\optbox[optboxsize=2 1](2.45,6.45)(3.45,6.45)
+	\optbox[optboxsize=2 1](2.3,6.3)(3.3,6.3)
+	\optbox[optboxsize=2 1](2.15,6.15)(3.15,6.15)
+	\optbox[optboxsize=2 1](2,6)(3,6)
+	\rput[r](1.4,6){$y$}
+	\rput[r](2.6,5.3){$x$}
+	\rput[r](4,5.6){$\tau$}
+	
+	
+	\optbox[optboxsize=2 1](2.45,4.45)(3.45,4.45)
+	\optbox[optboxsize=2 1](2.3,4.3)(3.3,4.3)
+	\optbox[optboxsize=2 1](2.15,4.15)(3.15,4.15)
+	\optbox[optboxsize=2 1](2,4)(3,4)
+	\rput[r](1.4,4){$y$}
+	\rput[r](2.6,3.3){$x$}
+	\rput[r](4,3.6){$\omega$}
+	
+	
+	\optbox[optboxsize=2 1](2.3,2.5)(3.3,2.5)
+
+	
+	\optbox[optboxsize=2 1](2.45,0.95)(3.45,0.95)
+	\optbox[optboxsize=2 1](2.3,0.8)(3.3,0.8)
+	\optbox[optboxsize=2 1](2.15,0.65)(3.15,0.65)
+	\optbox[optboxsize=2 1](2,0.5)(3,0.5)
+	\rput[r](1.4,0){$y$}
+	\rput[r](2.6,-0.2){$x$}
+	\rput[r](4,0.1){$\tau$}
+\end{pspicture}
+\end{frame}
+
 \section{Results}
 \begin{frame}{Results for the Ti:S laser}
 
@@ -194,12 +229,16 @@ Combined use of Fourier-Transform Interferometry and SEA-SPIDER.
 	\begin{itemize}
 		\item Use of corner cube retroreflectors (CCR) for better alignment
 		\item Use of piezo stage for better sampling
+		\item Use 90/10 beamsplitter in place of BS1
 	\end{itemize}
 	
 	\vspace{5pt}
 \textbf{Summary}:\\
+	We would have some results if we were given the right tools.
 \end{frame}
-
+\begin{frame}
+Thanks to the MATLAB customer service because they are there when you need it. They have a support service that the Ihmperihal Colilege can only dream it.
+\end{frame}
 \end{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
