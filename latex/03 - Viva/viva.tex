@@ -93,6 +93,7 @@
 
 \textbf{Techniques availables}:\\
 \begin{itemize}
+\item Autocorrelation
 \item Spectrography
 \begin{itemize}
 \item Frequency-Resolved Optical Gating (FROG and variations)
@@ -100,15 +101,21 @@
 \item Interferometry
 \begin{itemize}
 \item Spectral Phase Interferometry for Direct Electric field Reconstruction (SPIDER and variations).
-\item Fourier-Transform Interferometry
 \end{itemize}
 \end{itemize}	
 %There are already some developed techniques such as FROG and SPIDER, and their variations (e.g. SEA-SPIDER).
 
+\textbf{Note}:\\
+Normally characterisation of a single spatial point in time (1D).\\
+Can be extended to comprehend up to one spatial dimension (2D).
+
+\end{frame}
+
+\begin{frame}
 \textbf{Our target}:\\
-Combined use of Fourier-Transform Interferometry and SEA-SPIDER.
+Obtain a full 3D characterisation of the laser pulse.
 
-
+Combined use of Fourier-Transform Interferometry and SEA-F-SPIDER.
 \end{frame}
 
 \section{Self-Coherence Interferometry}
@@ -185,38 +192,51 @@ Combined use of Fourier-Transform Interferometry and SEA-SPIDER.
 \end{frame}
 
 \begin{frame}{Fourier Transform Spectrometry}
+\begin{columns}[T,onlytextwidth]
+\column{.49\textwidth}
+	\begin{enumerate}
+		\item acquire $I(x,y,\tau_i)$ for $i = 1,2,3,\ldots, N$
+		\vspace{25pt}
+		\item Fourier-transform to $$FT\left[I(x.,y.,\tau)\right] = \tilde{I}(x.,y.,\omega)$$% for every pixel $(x.,y.)$.
+		\vspace{-5pt}
+		\item isolate, multiply phases.
+		\vspace{20pt}
+		\item Fourier transform back to $$FT^{-1}\left[\tilde{I}(x.,y.,\omega)\right] = I_{pulse}(x.,y.,\tau)$$% for every pixel $(x.,y.)$.
+	\end{enumerate}
+\column{.49\textwidth}
+	\begin{pspicture}(4,7)
+		\psset{fillstyle=solid, fillcolor=white}
+		\optbox[optboxsize=2 1](2.45,6.45)(3.45,6.45)
+		\optbox[optboxsize=2 1](2.3,6.3)(3.3,6.3)
+		\optbox[optboxsize=2 1](2.15,6.15)(3.15,6.15)
+		\optbox[optboxsize=2 1](2,6)(3,6)
+		\rput[r](1.4,6){$y$}
+		\rput[r](2.6,5.3){$x$}
+		\rput[r](4,5.6){$\tau$}
+		
+		
+		\optbox[optboxsize=2 1](2.45,4.45)(3.45,4.45)
+		\optbox[optboxsize=2 1](2.3,4.3)(3.3,4.3)
+		\optbox[optboxsize=2 1](2.15,4.15)(3.15,4.15)
+		\optbox[optboxsize=2 1](2,4)(3,4)
+		\rput[r](1.4,4){$y$}
+		\rput[r](2.6,3.3){$x$}
+		\rput[r](4,3.6){$\omega$}
+		
+		
+		\optbox[optboxsize=2 1](2.3,2.5)(3.3,2.5)
+	
+		
+		\optbox[optboxsize=2 1](2.45,0.95)(3.45,0.95)
+		\optbox[optboxsize=2 1](2.3,0.8)(3.3,0.8)
+		\optbox[optboxsize=2 1](2.15,0.65)(3.15,0.65)
+		\optbox[optboxsize=2 1](2,0.5)(3,0.5)
+		\rput[r](1.4,0){$y$}
+		\rput[r](2.6,-0.2){$x$}
+		\rput[r](4,0.1){$\tau$}
+	\end{pspicture}
+\end{columns}
 
-\begin{pspicture}(4,7)
-	\psset{fillstyle=solid, fillcolor=white}
-	\optbox[optboxsize=2 1](2.45,6.45)(3.45,6.45)
-	\optbox[optboxsize=2 1](2.3,6.3)(3.3,6.3)
-	\optbox[optboxsize=2 1](2.15,6.15)(3.15,6.15)
-	\optbox[optboxsize=2 1](2,6)(3,6)
-	\rput[r](1.4,6){$y$}
-	\rput[r](2.6,5.3){$x$}
-	\rput[r](4,5.6){$\tau$}
-	
-	
-	\optbox[optboxsize=2 1](2.45,4.45)(3.45,4.45)
-	\optbox[optboxsize=2 1](2.3,4.3)(3.3,4.3)
-	\optbox[optboxsize=2 1](2.15,4.15)(3.15,4.15)
-	\optbox[optboxsize=2 1](2,4)(3,4)
-	\rput[r](1.4,4){$y$}
-	\rput[r](2.6,3.3){$x$}
-	\rput[r](4,3.6){$\omega$}
-	
-	
-	\optbox[optboxsize=2 1](2.3,2.5)(3.3,2.5)
-
-	
-	\optbox[optboxsize=2 1](2.45,0.95)(3.45,0.95)
-	\optbox[optboxsize=2 1](2.3,0.8)(3.3,0.8)
-	\optbox[optboxsize=2 1](2.15,0.65)(3.15,0.65)
-	\optbox[optboxsize=2 1](2,0.5)(3,0.5)
-	\rput[r](1.4,0){$y$}
-	\rput[r](2.6,-0.2){$x$}
-	\rput[r](4,0.1){$\tau$}
-\end{pspicture}
 \end{frame}
 
 \section{Results}
@@ -234,11 +254,9 @@ Combined use of Fourier-Transform Interferometry and SEA-SPIDER.
 	
 	\vspace{5pt}
 \textbf{Summary}:\\
-	We would have some results if we were given the right tools.
+	
 \end{frame}
-\begin{frame}
-Thanks to the MATLAB customer service because they are there when you need it. They have a support service that the Ihmperihal Colilege can only dream it.
-\end{frame}
+
 \end{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
