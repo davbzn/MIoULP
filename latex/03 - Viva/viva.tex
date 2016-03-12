@@ -21,25 +21,20 @@
 \logo{\includegraphics[height=0.8cm]{Imperial_2_Pantones.eps}\vspace{233pt}\hspace{264pt}} 
 \institute{Imperial College London} 
 \date{16$^{\mathrm{th}}$ March 2016} 
-\subject{}
+\subject{Ultrafast Metrology}
 
-\defbeamertemplate*{title page}{customized}[1][]
-{
-\bigskip
-\bigskip
+\defbeamertemplate*{title page}{customized}[1][]{
+\vspace{24pt}
 \begin{center}
 	{
 	\usebeamerfont{title}\insertinstitute}\par
-	\bigskip
-	\bigskip
+	\vspace{24pt}
 	{BSc 3rd Year Project}\par
-	\bigskip
+	\vspace{12pt}
  	{\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}\par
-	\bigskip
-	\bigskip
+	\vspace{24pt}
 	{\usebeamerfont{date}\insertdate}\par
-	\bigskip
-	\bigskip
+	\vspace{24pt}
 	\begin{parcolumns}{3}
 		\colchunk[1]{Assessor:\\ \textbf{John Tisch}}
 		\colchunk[2]{Supervisor:\\ \textbf{Tobias Witting}}
@@ -47,22 +42,6 @@
 	\end{parcolumns}
 \end{center}
 }
-
-%\setbeamertemplate{title page}
-%{
-%	\vbox{}
-%	\vfill
-%	\begin{centering}
-%		{\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}
-%		\vskip0.2em
-%		{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle}
-%		\vskip2em\par
-%		\small\insertauthor\par
-%		\vskip0.7em\par
-%		\tiny\insertdate\vskip1em\par
-%	\end{centering}
-%% 	\vfill
-%}
 
 \begin{document}
 
@@ -76,70 +55,124 @@
 
 \section{Introduction}
 \begin{frame}{Introduction}
+\textbf{Field of study}:\\
+	ultrafast laser metrology
+	
+\vspace{15pt}
 \textbf{Aim}:\\
 	measure the 3D spatial profile of an ultrafast laser pulse
 
-	\vspace{15pt}
+\vspace{15pt}
 \textbf{Challenge}:\\
 	short duration of laser pulses, down to few femtoseconds ($\SI{e-15}{\s}$)
 	
-	\vspace{15pt}
+\vspace{15pt}
 \textbf{Method}:\\
-	direct measurement of single pulse is impossible,
-	measure intensity averaged on many pulses
+	direct measurement of single pulse is impossible,\\
+	indirect approches measure the intensity averaged on many pulses
 \end{frame}
 
 \begin{frame}
-
 \textbf{Techniques availables}:\\
 \begin{itemize}
-\item Autocorrelation
 \item Spectrography
-\begin{itemize}
-\item Frequency-Resolved Optical Gating (FROG and variations)
-\end{itemize}
+	\begin{itemize}
+		\item Frequency-Resolved Optical Gating (FROG and variations)
+	\end{itemize}
 \item Interferometry
-\begin{itemize}
-\item Spectral Phase Interferometry for Direct Electric field Reconstruction (SPIDER and variations).
+	\begin{itemize}
+		\item Autocorrelation
+		\item Spectral Phase Interferometry for Direct Electric field Reconstruction (SPIDER and variations).
+	\end{itemize}
+	\item Tomography
 \end{itemize}
-\end{itemize}	
-%There are already some developed techniques such as FROG and SPIDER, and their variations (e.g. SEA-SPIDER).
 
+\vspace{15pt}
 \textbf{Note}:\\
 Normally characterisation of a single spatial point in time (1D).\\
 Can be extended to comprehend up to one spatial dimension (2D).
-
 \end{frame}
 
-\begin{frame}
+\section{Fourier-Transform Spectral Interferometry}
+\begin{frame}{Fourier-Transform Spectral Interferometry}
+\textbf{Technique choosen}:\\
+Mix of interferometric techniques.
+Fourier-Transform Spectral Interferometry (FTSI) combined with SEA-F-SPIDER.\\
+\begin{itemize}
+	\item FTSI obtains information on the phase-difference between the test pulse and a reference.\\
+	\item SEA-F-SPIDER characterise the reference pulse.
+\end{itemize}
+
+\vspace{15pt}
 \textbf{Our target}:\\
 Obtain a full 3D characterisation of the laser pulse.
 
-Combined use of Fourier-Transform Interferometry and SEA-F-SPIDER.
+\vspace{10pt}
+May be achieved with the use of a Mach-Zender interferometer
 \end{frame}
 
-\section{Self-Coherence Interferometry}
-\begin{frame}{Self-Coherence Interferometry}
-
-\begin{parcolumns}{2}
-	\colchunk[1]{
-		Studies the interference between a wave and a copy of itself with a certain delay.
-
-%		\vspace{100pt}
-		May be achieved with the use of a Mach-Zender interferometer
-	}
-	\colchunk[2]{
-		image
-	}
-\end{parcolumns}
-\end{frame}
-
-%\section{Setup}
-%\begin{frame}{Mach-Zender Interferometer}
-%\begin{figure}
-%	\includegraphics[scale=1]{text6260-83.png}
-%\end{figure}
+%\begin{frame}
+%describe the different steps of FTSI
+%
+%\begin{align}
+%	I(\tau) 	&= \int|U(t)|^2\mathrm{d}t + \int|U_r(t)|^2\mathrm{d}t\\
+%			&\quad + \int U(t)U_r^*(t-\tau)\mathrm{d}t + \int U^*(t)U_r(t-\tau)\mathrm{d}t 
+%	\label{eq_inter}
+%\end{align}
+%
+%\begin{align}
+%	FT\left\lbrace I(\tau)\right\rbrace 	&= 	FT\left\lbrace \int|U(t)|^2\mathrm{d}t + \int|U_r(t)|^2\mathrm{d}t\right\rbrace \\
+%			&\quad + \tilde{U}(\omega)\tilde{U}_r^*(\omega) + \tilde{U}^*(-\omega)\tilde{U}_r(-\omega)
+%	\label{eq_fourier}
+%\end{align}
+%\begin{equation}
+%\tilde{U}(\omega)\tilde{U}_r^*(\omega) = A(\omega) = |\tilde{U}(\omega)||\tilde{U}_r^*(\omega)|\mathrm{e}^{i[\psi(\omega)-\psi_r(\omega)]}
+%\end{equation}
+%\begin{equation}
+%\tilde{U}(\omega)\mathrm{e}^{i\psi(\omega)} = \frac{A(\omega)}{|\tilde{U}_r^*(\omega)|}\mathrm{e}^{i\psi_r(\omega)}
+%\end{equation}
 %\end{frame}
+
+\begin{frame}
+\begin{figure}
+	\centering
+	\includegraphics[scale=1]{interference.eps}
+\end{figure}
+\begin{align}
+	I(\tau) 	&= \int|U(t)|^2\mathrm{d}t + \int|U_r(t)|^2\mathrm{d}t \nonumber\\
+			&\quad + \int U(t)U_r^*(t-\tau)\mathrm{d}t + \int U^*(t)U_r(t-\tau)\mathrm{d}t 
+	\label{eq_inter}
+\end{align}
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.6]{spectrum_phase.eps}
+\end{figure}
+\vspace{-25pt}
+\begin{align}
+	FT\left\lbrace I(\tau)\right\rbrace 	&= 	FT\left\lbrace \int|U(t)|^2\mathrm{d}t + \int|U_r(t)|^2\mathrm{d}t\right\rbrace \nonumber \\
+			&\quad + \tilde{U}(\omega)\tilde{U}_r^*(\omega) + \tilde{U}^*(-\omega)\tilde{U}_r(-\omega)
+	\label{eq_fourier}
+\end{align}
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.6]{gaussian_filter.eps}
+\end{figure}
+\vspace{-25pt}
+\begin{equation}
+\tilde{U}(\omega)\tilde{U}_r^*(\omega) = A(\omega) = |\tilde{U}(\omega)||\tilde{U}_r^*(\omega)|\mathrm{e}^{i[\psi(\omega)-\psi_r(\omega)]}
+	\label{eq_gauss}
+\end{equation}
+\begin{equation}
+\tilde{U}(\omega)\mathrm{e}^{i\psi(\omega)} = \frac{A(\omega)}{|\tilde{U}_r^*(\omega)|}\mathrm{e}^{i\psi_r(\omega)}
+	\label{eq_field}
+\end{equation}
+\end{frame}
 
 \section{Setup}
 \begin{frame}{Mach-Zender Interferometer}
@@ -158,10 +191,10 @@ Combined use of Fourier-Transform Interferometry and SEA-F-SPIDER.
 	
 	\mirror(BSA)(C)(D){M1}
 	\mirror(C)(D)(E){M2}
-	\oapmirror[oapmirroraperture=1.5](D)(E)(Focus){OAP}
+	\oapmirror[oapmirroraperture=1.3, mirrortype=extended](D)(E)(Focus){OAP}
 	\pinhole[outerheight=1,innerheight=0.1,phlinewidth=0.1](Focus)(Focus){PH}
 	
-	\beamsplitter(I)(BSB)(OUT){BS1}
+	\beamsplitter(I)(BSB)(OUT){BS2}
 	
 	\mirror(BSA)(G)(H){M3}
 	\mirror(G)(H)(I){M4}
@@ -170,7 +203,8 @@ Combined use of Fourier-Transform Interferometry and SEA-F-SPIDER.
 	\drawwidebeam[beamwidth=0.4](IN){1-6}(OUT)
 	\drawwidebeam[beamwidth=0.4](IN)(BSA){7-9}{6}(OUT)
 	
-	\pnode(11,7){Z}
+	\pnode(6,6){ND}
+	\optbox[optboxsize=0.2 1.3, labeloffset=1](BSA)(ND){ND filter}
 	\optbox[optboxsize=1.6 3.1](7,5.25)(9.2,5.25)
 	\rput[r](9.65,5.5){$\tau$\psline[arrows=<->](-0.65, -0.15)(0.35, -0.15)}
 	
@@ -178,30 +212,46 @@ Combined use of Fourier-Transform Interferometry and SEA-F-SPIDER.
 \end{center}
 \end{frame}
 
-\section{Data Analysis}
-\begin{frame}{Fourier Transform Spectrometry}
-% replace with block diagram
+\begin{frame}
+\textbf{Mach-Zender components}:\\
 \begin{itemize}
-	\item acquire $I(x,y,\tau.)$ at different $\tau.$ delays.
-	\item apply Fourier transform to $I(x.,y.,\tau)$ for every pixel $(x.,y.)$, obtaining $\tilde{I}(x.,y.,\omega)$.
-	\item isolate the interference pattern (remove constant values).
-	\item multiply reference phase (pinhole) as function of $\phi(x,y,\omega)$
-	\item apply the inverse Fourier transform to $\tilde{I}(x.,y.,\omega)$, obtaining $I_{pulse}(x.,y.,\tau)$ for every pixel $(x.,y.)$.
+	\item 2x broadband \textbf{beamsplitter} with AR coating (BS1, BS2)
+	\item 5x standard metal \textbf{mirrors} (M1, M2, M3, M4, M5)
+	\item 1x gold coated off-axis \textbf{parabolic mirror} (OAP)
+	\item 1x \SI{20}{\um} \textbf{pinhole} (PH)
+	\item 1x \textbf{moving platform} (Zaber attuator) with a \SI{0.047625}{\um} minimum step.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Sources}:\\
+\begin{itemize}
+	\item HeNe c.w. laser, $\lambda_{HeNe} = \SI{632.8}{\nm}$ - used for alignment
+	\item Ti:S modelocked laser, producing \SI{30}{\fs} pulses compressed into \SI{3.7}{\fs} pulses through a hollow fiber and broadband chirped mirrors.
+\end{itemize}
+	
+%	\vspace{5pt}
+\textbf{Sensor}:\\
+\begin{itemize}
+	\item Allied Vision Guppy Pro F-503, Industrial CMOS camera (2588 $\times$ 1940 standard resolution)
 \end{itemize}
 
 \end{frame}
 
-\begin{frame}{Fourier Transform Spectrometry}
+\section{Data Analysis}
+
+\begin{frame}{Data Analysis}
 \begin{columns}[T,onlytextwidth]
 \column{.49\textwidth}
 	\begin{enumerate}
+		\vspace{5pt}
 		\item acquire $I(x,y,\tau_i)$ for $i = 1,2,3,\ldots, N$
-		\vspace{25pt}
+		\vspace{20pt}
 		\item Fourier-transform to $$FT\left[I(x.,y.,\tau)\right] = \tilde{I}(x.,y.,\omega)$$% for every pixel $(x.,y.)$.
 		\vspace{-5pt}
-		\item isolate, multiply phases.
-		\vspace{20pt}
-		\item Fourier transform back to $$FT^{-1}\left[\tilde{I}(x.,y.,\omega)\right] = I_{pulse}(x.,y.,\tau)$$% for every pixel $(x.,y.)$.
+		\item isolate $\tilde{I}_{int}$, multiply phases.
+		\vspace{10pt}
+		\item Fourier transform back to $$IFT\left[\tilde{I}_{int}(x.,y.,\omega)\right] = I_{p}(x.,y.,\tau)$$% for every pixel $(x.,y.)$.
 	\end{enumerate}
 \column{.49\textwidth}
 	\begin{pspicture}(4,7)
@@ -210,6 +260,9 @@ Combined use of Fourier-Transform Interferometry and SEA-F-SPIDER.
 		\optbox[optboxsize=2 1](2.3,6.3)(3.3,6.3)
 		\optbox[optboxsize=2 1](2.15,6.15)(3.15,6.15)
 		\optbox[optboxsize=2 1](2,6)(3,6)
+		\optdipole[labeloffset=1](2,6)(3,6){%
+			\includegraphics[scale=.2]{logo.eps}
+		}
 		\rput[r](1.4,6){$y$}
 		\rput[r](2.6,5.3){$x$}
 		\rput[r](4,5.6){$\tau$}
@@ -223,15 +276,15 @@ Combined use of Fourier-Transform Interferometry and SEA-F-SPIDER.
 		\rput[r](2.6,3.3){$x$}
 		\rput[r](4,3.6){$\omega$}
 		
-		
-		\optbox[optboxsize=2 1](2.3,2.5)(3.3,2.5)
+		\optbox[optboxsize=2 1](2,2.5)(3,2.5)
+		\rput[r](1.4,2.5){$I$}
+		\rput[r](2.6,1.8){$\omega$}
 	
-		
 		\optbox[optboxsize=2 1](2.45,0.95)(3.45,0.95)
 		\optbox[optboxsize=2 1](2.3,0.8)(3.3,0.8)
 		\optbox[optboxsize=2 1](2.15,0.65)(3.15,0.65)
 		\optbox[optboxsize=2 1](2,0.5)(3,0.5)
-		\rput[r](1.4,0){$y$}
+		\rput[r](1.4,0.5){$y$}
 		\rput[r](2.6,-0.2){$x$}
 		\rput[r](4,0.1){$\tau$}
 	\end{pspicture}
@@ -243,12 +296,12 @@ Combined use of Fourier-Transform Interferometry and SEA-F-SPIDER.
 \begin{frame}{Results for the Ti:S laser}
 
 \end{frame}
-\section{Conclusion}
-\begin{frame}{Conclusion}
+\section{Conclusions}
+\begin{frame}{Conclusions}
 \textbf{Improvements}:\\
 	\begin{itemize}
 		\item Use of corner cube retroreflectors (CCR) for better alignment
-		\item Use of piezo stage for better sampling
+		\item Use of piezo stage for better sampling, but worse range
 		\item Use 90/10 beamsplitter in place of BS1
 	\end{itemize}
 	
@@ -258,100 +311,3 @@ Combined use of Fourier-Transform Interferometry and SEA-F-SPIDER.
 \end{frame}
 
 \end{document}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%\documentclass[11pt, leqno]{beamer}
-%\usetheme{Dresden}
-%\usepackage[utf8]{inputenc}
-%\usepackage[english]{babel}
-%\usepackage{amsmath}
-%\usepackage{amsfonts}
-%\usepackage{amssymb}
-%\usepackage{graphicx}
-%\usepackage[compatibility=false]{caption}
-%\usepackage{subcaption}
-%\usepackage{multicol}
-%
-%\usepackage{siunitx}
-%\usepackage{wrapfig}
-%%\usepackage{float}
-%
-%\usepackage{caption}
-%\usepackage{subcaption}
-%
-%\usepackage{parcolumns}
-%\usepackage{amsthm}
-%\usepackage{sidecap}
-%\usepackage{physics}
-%
-%\usepackage{multirow}
-%\usepackage{array}
-%
-%\defbeamertemplate*{title page}{customized}[1][]
-%{
-%\begin{center}
-%  \includegraphics[height=2.3cm]{unitn_logo}\\
-%  \usebeamerfont{institute}\insertinstitute\par
-%  \bigskip
-% {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}\par
-%  \bigskip
-%  \bigskip
-%  \bigskip
-%  {\usebeamerfont{date}}\insertdate\par
-%  \bigskip
-%  \bigskip
-%\begin{parcolumns}{2}
-%   \colchunk{Thesis Advisor:\\ \textbf{Lorenzo Pavesi}\\ \textbf{Mattia Mancinelli}}
-%   \colchunk[2]{Student:\\ \textbf{Davide Bazzanella}}
-%\end{parcolumns}
-%\end{center}
-%}
-%
-%\author{Davide Bazzanella}
-%\title{Thermal tuning of phase-matching in a multimodal SOI waveguide with $\chi^{(3)}$ non linearity}
-%\date{28 settembre 2015} 
-%%\textsc{\LARGE \textbf{DEPARTMENT OF PHYSICS}}\\[0.5cm]
-%%\textsc{\LARGE \textbf{DEGREE IN PHYSICS – LAUREA IN FISICA}}\\[2.5cm]
-%%\textsc{\Large THESIS}\\[1.3cm]
-%
-%
-%
-%%\setbeamercovered{transparent} 
-%\setbeamertemplate{navigation symbols}{} 
-%%\logo{} 
-%%\institute{} 
-%%\subject{} 
-%
-%\usepackage{lmodern}
-%\newcommand{\frameofframes}{/}
-%\newcommand{\setframeofframes}[1]{\renewcommand{\frameofframes}{#1}}
-%
-%\setframeofframes{of}
-%\makeatletter
-%\setbeamertemplate{footline}
-%  {%
-%    \begin{beamercolorbox}[colsep=1.5pt]{upper separation line foot}
-%    \end{beamercolorbox}
-%    \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
-%      leftskip=.3cm,rightskip=.3cm plus1fil]{author in head/foot}%
-%      \leavevmode{\usebeamerfont{author in head/foot}\insertshortauthor}%
-%      \hfill%
-%      {\usebeamerfont{institute in head/foot}\usebeamercolor[fg]{institute in head/foot}\insertshortinstitute}%
-%    \end{beamercolorbox}%
-%    \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
-%      leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
-%      {\usebeamerfont{title in head/foot}\insertshorttitle}%
-%      \hfill%
-%      {\usebeamerfont{frame number}\usebeamercolor[fg]{frame number}\insertframenumber~\frameofframes~\inserttotalframenumber}
-%    \end{beamercolorbox}%
-%    \begin{beamercolorbox}[colsep=1.5pt]{lower separation line foot}
-%    \end{beamercolorbox}
-%  }
-%\makeatother
-%
-%\begin{document}
-%ciao 
-%%\frame{\titlepage}
-%
-%\end{document}
