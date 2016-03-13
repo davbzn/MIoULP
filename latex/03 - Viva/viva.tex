@@ -134,10 +134,12 @@ May be achieved with the use of a Mach-Zender interferometer
 %\end{frame}
 
 \begin{frame}
+\vspace{10pt}
 \begin{figure}
 	\centering
-	\includegraphics[scale=1]{interference.eps}
+	\includegraphics[scale=0.6]{interference2.eps}
 \end{figure}
+\vspace{-20pt}
 \begin{align}
 	I(\tau) 	&= \int|U(t)|^2\mathrm{d}t + \int|U_r(t)|^2\mathrm{d}t \nonumber\\
 			&\quad + \int U(t)U_r^*(t-\tau)\mathrm{d}t + \int U^*(t)U_r(t-\tau)\mathrm{d}t 
@@ -146,11 +148,12 @@ May be achieved with the use of a Mach-Zender interferometer
 \end{frame}
 
 \begin{frame}
+\vspace{10pt}
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.6]{spectrum_phase.eps}
+	\includegraphics[scale=0.6]{spectrum_phase2.eps}
 \end{figure}
-\vspace{-25pt}
+\vspace{-20pt}
 \begin{align}
 	FT\left\lbrace I(\tau)\right\rbrace 	&= 	FT\left\lbrace \int|U(t)|^2\mathrm{d}t + \int|U_r(t)|^2\mathrm{d}t\right\rbrace \nonumber \\
 			&\quad + \tilde{U}(\omega)\tilde{U}_r^*(\omega) + \tilde{U}^*(-\omega)\tilde{U}_r(-\omega)
@@ -159,15 +162,19 @@ May be achieved with the use of a Mach-Zender interferometer
 \end{frame}
 
 \begin{frame}
+\vspace{10pt}
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.6]{gaussian_filter.eps}
+	\includegraphics[scale=0.6]{gaussian_filter2.eps}
 \end{figure}
-\vspace{-25pt}
+%\vspace{-25pt}
 \begin{equation}
 \tilde{U}(\omega)\tilde{U}_r^*(\omega) = A(\omega) = |\tilde{U}(\omega)||\tilde{U}_r^*(\omega)|\mathrm{e}^{i[\psi(\omega)-\psi_r(\omega)]}
 	\label{eq_gauss}
 \end{equation}
+\end{frame}
+
+\begin{frame}
 \begin{equation}
 \tilde{U}(\omega)\mathrm{e}^{i\psi(\omega)} = \frac{A(\omega)}{|\tilde{U}_r^*(\omega)|}\mathrm{e}^{i\psi_r(\omega)}
 	\label{eq_field}
@@ -215,7 +222,7 @@ May be achieved with the use of a Mach-Zender interferometer
 \begin{frame}
 \textbf{Mach-Zender components}:\\
 \begin{itemize}
-	\item 2x broadband \textbf{beamsplitter} with AR coating (BS1, BS2)
+	\item 2x broadband \textbf{beamsplitters} with AR coating (BS1, BS2)
 	\item 5x standard metal \textbf{mirrors} (M1, M2, M3, M4, M5)
 	\item 1x gold coated off-axis \textbf{parabolic mirror} (OAP)
 	\item 1x \SI{20}{\um} \textbf{pinhole} (PH)
@@ -261,12 +268,11 @@ May be achieved with the use of a Mach-Zender interferometer
 		\optbox[optboxsize=2 1](2.15,6.15)(3.15,6.15)
 		\optbox[optboxsize=2 1](2,6)(3,6)
 		\optdipole[labeloffset=1](2,6)(3,6){%
-			\includegraphics[scale=.2]{logo.eps}
+			\includegraphics[scale=.1]{imagesc2.eps}
 		}
 		\rput[r](1.4,6){$y$}
 		\rput[r](2.6,5.3){$x$}
-		\rput[r](4,5.6){$\tau$}
-		
+		\rput[r](4,5.6){$\tau$}		
 		
 		\optbox[optboxsize=2 1](2.45,4.45)(3.45,4.45)
 		\optbox[optboxsize=2 1](2.3,4.3)(3.3,4.3)
@@ -289,7 +295,12 @@ May be achieved with the use of a Mach-Zender interferometer
 		\rput[r](4,0.1){$\tau$}
 	\end{pspicture}
 \end{columns}
+\end{frame}
 
+\begin{frame}
+\begin{itemize}
+	\item acquire interferogram for each pixel at different delays
+\end{itemize}
 \end{frame}
 
 \section{Results}
@@ -302,7 +313,7 @@ May be achieved with the use of a Mach-Zender interferometer
 	\begin{itemize}
 		\item Use of corner cube retroreflectors (CCR) for better alignment
 		\item Use of piezo stage for better sampling, but worse range
-		\item Use 90/10 beamsplitter in place of BS1
+		\item Use 90/10 beamsplitter in place of 50/50 BS1
 	\end{itemize}
 	
 	\vspace{5pt}

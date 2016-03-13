@@ -2,7 +2,7 @@
 
 clear
 
-if 1    % change this value manually, depending on what you need
+if 0    % change this value manually, depending on what you need
     [ans1, ans2] = uigetfile({'../data/*.mat'});  % choose file to load
     sett.data_file   = strcat(ans2,ans1);         % filepath of the data file
 
@@ -181,25 +181,38 @@ spi.ax.fr   = spi.rec.of.omega'./(2*pi);
 in.phase    = interp1(spi.ax.fr, spi.rec.of.phify(spi.rec.y0indo(1),:,1), ax.fr0, 'linear', 0);
 in.int      = interp1(spi.ax.fr, spi.rec.of.Ify(spi.rec.y0indo(1),:,1),   ax.fr0, 'linear', 0);
 
+sect = [(630:1024)]'; %[(318:415),(615:710)]';
 % create vector of phase for ND filter
 sett.ND_len = 5.41e6;  % nm
 ax.NDph     = (2*pi/ax.c_const*sett.ND_len).*ax.fr0.*(real(n_BK7(ax.fr0)) -1 );
-ax.p        = polyfit(ax.fr0(find(in.phase~=0)),ax.NDph(find(in.phase~=0)),1); %318:415 611:708
+ax.p        = polyfit(ax.fr0(sect),ax.NDph(sect),1);
 ax.NDph_2   = squeeze(ax.NDph) - (ax.fr0.*ax.p(1)+ax.p(2));
 ax.NDph_3   = zeros(1,1024);
-ax.NDph_3(find(in.phase~=0))   = ax.NDph_2(find(in.phase~=0));
+ax.NDph_3(sect)   = ax.NDph_2(sect);
+
+if sett.graph
+    figure
+    plot(ax.fr0,unwrap(angle(squeeze(in.f(ax.cv,ax.ch,:)))))
+    hold on
+    plot(ax.fr0,unwrap(angle(squeeze(in.f(ax.cv,ax.ch,:)).*exp(-1i.*ax.NDph_3'))))
+    hold on
+    plot(ax.fr0,unwrap(angle(squeeze(in.f(ax.cv,ax.ch,:)).*exp(-1i.*ax.NDph'))))
+    title('Phase');
+    xlabel('Optical Frequency [PHz]')
+end
 
 % add phase to in.fmod_save
 in.phase    = reshape(in.phase, [1,1,ax.NF]);
 in.int      = reshape(in.int, [1,1,ax.NF]);
 ax.NDph_3   = reshape(ax.NDph_3, [1,1,ax.NF]);
+ax.NDph     = reshape(ax.NDph, [1,1,ax.NF]);
 
 % which of the next two should I use?
 %in.int(find(in.int==0)) = 1;
 in.int      = in.int+eps;
 %in.int(find(in.phase==0)) = inf;
 
-in.fphased  = bsxfun(@times,in.fmod, exp(1i*(in.phase-ax.NDph_3)) ./sqrt(in.int));   
+in.fphased  = bsxfun(@times,in.fmod, exp(1i*in.phase).*exp(1i.*ax.NDph) ./sqrt(in.int));   
 
 clear ax.g %in.fmod
 
