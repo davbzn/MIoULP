@@ -33,15 +33,17 @@ gauss,    = f1.plot(xfr0, ygau, '-', c='red')
 
 f1.set_ylabel(r'Intensity [a.u.]', labelpad=2, fontsize=14)
 #f1.set_xlabel(r'Optical Frequency [PHz]', labelpad=2, fontsize=14)
-f1.set_xlabel(r'Optical Frequency [PHz]', labelpad=2, fontsize=14)
+f1.set_xlabel(r'Optical Frequency [PHz], Wavelength [nm]', labelpad=2, fontsize=14)
 
-f1.set_ylim((-0.1, 1.27))
+f1.set_ylim((-0.1, 1.1))
 #f1.set_yticks(np.arange(-90, 1, 15))
 f1.set_xlim((0.1,0.7))
 
 f1.grid(True)
 
-f1.legend([spectrum, gauss, filtered],('Spectrum', 'Gauss filter', 'Spectrum filtered'), ncol=3, loc=9)
+f1.legend([spectrum, gauss, filtered],('Spectrum', 'Gauss\n filter', 'Spectrum\n filtered'),
+	  loc='center right', bbox_to_anchor=(1.375, 0.5) )#, prop={'size': 12})  
+#ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
 
 f2 = f1.twiny()  # ax2 is responsible for "top" axis and "right" axis
 
@@ -55,9 +57,11 @@ f2.set_xticklabels(x2labels)
 # force the bounds to be the same
 f2.set_xlim(f1.get_xlim()) 
 
-f2.set_xlabel('Wavelength [nm]')
+f1.text(0.76, 1.156, r'[nm]', size=12, va='center', ha='center')
+
+#f2.set_xlabel('Wavelength [nm]')
 
 #fig1.subplots_adjust(left=0.08, right=0.72, top=0.8, bottom=0.12, hspace=0.085, wspace=0.05)
-fig1.subplots_adjust(left=0.08, right=0.97, top=0.8, bottom=0.12, hspace=0.085, wspace=0.05)
+fig1.subplots_adjust(left=0.08, right=0.75, top=0.86, bottom=0.12, hspace=0.085, wspace=0.05)
 # mostra grafico
 plt.show()

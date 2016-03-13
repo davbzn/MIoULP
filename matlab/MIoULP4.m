@@ -194,9 +194,9 @@ if sett.graph
     figure
     plot(ax.fr0,unwrap(angle(squeeze(in.f(ax.cv,ax.ch,:)))))
     hold on
-    plot(ax.fr0,unwrap(angle(squeeze(in.f(ax.cv,ax.ch,:)).*exp(-1i.*ax.NDph_3'))))
+    plot(ax.fr0,unwrap(angle(squeeze(in.f(ax.cv,ax.ch,:)).*exp(1i.*ax.NDph_2'))))
     hold on
-    plot(ax.fr0,unwrap(angle(squeeze(in.f(ax.cv,ax.ch,:)).*exp(-1i.*ax.NDph'))))
+    plot(ax.fr0,unwrap(angle(squeeze(in.f(ax.cv,ax.ch,:)).*exp(1i.*ax.NDph'))))
     title('Phase');
     xlabel('Optical Frequency [PHz]')
 end

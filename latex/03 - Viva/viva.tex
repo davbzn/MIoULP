@@ -89,7 +89,7 @@
 
 \vspace{15pt}
 \textbf{Note}:\\
-Normally characterisation of a single spatial point in time (1D).\\
+Normally, characterisation of a single spatial point in time (1D).\\
 Can be extended to comprehend up to one spatial dimension (2D).
 \end{frame}
 
@@ -97,10 +97,11 @@ Can be extended to comprehend up to one spatial dimension (2D).
 \begin{frame}{Fourier-Transform Spectral Interferometry}
 \textbf{Technique choosen}:\\
 Mix of interferometric techniques.
-Fourier-Transform Spectral Interferometry (FTSI) combined with SEA-F-SPIDER.\\
+Fourier-Transform Spectral Interferometry (FTSI) combined with a Mach-Zender interferometer and a SEA-F-SPIDER.\\
 \begin{itemize}
-	\item FTSI obtains information on the phase-difference between the test pulse and a reference.\\
-	\item SEA-F-SPIDER characterise the reference pulse.
+	\item the MZ interferometer retrieves $I(\tau) 	= \int|U(t) + U_r(t)|^2\mathrm{d}t$
+	\item SEA-F-SPIDER characterise the reference pulse $U_r(\omega)$
+	\item FTSI obtains the time complex field through Fourier-transforms $U(\omega) \rightarrow U(\tau)$
 \end{itemize}
 
 \vspace{15pt}
@@ -133,50 +134,67 @@ May be achieved with the use of a Mach-Zender interferometer
 %\end{equation}
 %\end{frame}
 
-\begin{frame}
-\vspace{10pt}
+\begin{frame}{Interferogram}
+\vspace{-15pt}
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.6]{interference2.eps}
 \end{figure}
-\vspace{-20pt}
-\begin{align}
-	I(\tau) 	&= \int|U(t)|^2\mathrm{d}t + \int|U_r(t)|^2\mathrm{d}t \nonumber\\
-			&\quad + \int U(t)U_r^*(t-\tau)\mathrm{d}t + \int U^*(t)U_r(t-\tau)\mathrm{d}t 
+\vspace{-15pt}
+%\begin{align}
+%	I(\tau) 	&= \int|U(t)|^2\mathrm{d}t + \int|U_r(t)|^2\mathrm{d}t \nonumber\\
+%			&\quad + \int U(t)U_r^*(t-\tau)\mathrm{d}t + \int U^*(t)U_r(t-\tau)\mathrm{d}t 
+%	\label{eq_inter}
+%\end{align}
+\begin{equation}
+	I(\tau) 	= I_p + I_r + \int U(t)U_r^*(t-\tau)\mathrm{d}t + \int U^*(t)U_r(t-\tau)\mathrm{d}t 
 	\label{eq_inter}
-\end{align}
+\end{equation}
 \end{frame}
 
-\begin{frame}
-\vspace{10pt}
+\begin{frame}{Spectrum and Phase}
+\vspace{-10pt}
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.6]{spectrum_phase2.eps}
 \end{figure}
 \vspace{-20pt}
+%	FT\left\lbrace I(\tau)\right\rbrace 	&= 	FT\left\lbrace \int|U(t)|^2\mathrm{d}t + \int|U_r(t)|^2\mathrm{d}t\right\rbrace \nonumber \\
+%			&\quad + \tilde{U}(\omega)\tilde{U}_r^*(\omega) + \tilde{U}^*(-\omega)\tilde{U}_r(-\omega)
 \begin{align}
-	FT\left\lbrace I(\tau)\right\rbrace 	&= 	FT\left\lbrace \int|U(t)|^2\mathrm{d}t + \int|U_r(t)|^2\mathrm{d}t\right\rbrace \nonumber \\
-			&\quad + \tilde{U}(\omega)\tilde{U}_r^*(\omega) + \tilde{U}^*(-\omega)\tilde{U}_r(-\omega)
+FT\left\lbrace I(\tau)\right\rbrace 	&= 	FT\left\lbrace I_p + I_r \right\rbrace 
++ \tilde{U}(\omega)\tilde{U}_r^*(\omega) + \tilde{U}^*(-\omega)\tilde{U}_r(-\omega)
 	\label{eq_fourier}
 \end{align}
 \end{frame}
 
-\begin{frame}
-\vspace{10pt}
+\begin{frame}{Spectrum}
+\vspace{-15pt}
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.6]{gaussian_filter2.eps}
+	\includegraphics[scale=0.6]{spectrum_zoom.eps}
 \end{figure}
-%\vspace{-25pt}
+\vspace{-5pt}
 \begin{equation}
-\tilde{U}(\omega)\tilde{U}_r^*(\omega) = A(\omega) = |\tilde{U}(\omega)||\tilde{U}_r^*(\omega)|\mathrm{e}^{i[\psi(\omega)-\psi_r(\omega)]}
+\tilde{U}(\omega)\tilde{U}_r^*(\omega) = A(\omega) = |\tilde{U}(\omega)||\tilde{U}_r(\omega)|\mathrm{e}^{i[\psi(\omega)-\psi_r(\omega)]}
 	\label{eq_gauss}
 \end{equation}
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Time complex field}
+The complex field in the spectrum domain is
+
 \begin{equation}
-\tilde{U}(\omega)\mathrm{e}^{i\psi(\omega)} = \frac{A(\omega)}{|\tilde{U}_r^*(\omega)|}\mathrm{e}^{i\psi_r(\omega)}
+\tilde{U}(\omega) = |\tilde{U}(\omega)|\mathrm{e}^{i\psi(\omega)} = \frac{A(\omega)}{|\tilde{U}_r(\omega)|}\mathrm{e}^{i\psi_r(\omega)}
+	\label{eq_field_spectral}
+\end{equation}
+where $|\tilde{U}_r^*(\omega)|$ and $\psi_r(\omega)$ are the spectral intensity and phase given by the SPIDER.
+
+\vspace{15pt}
+It can be Fourier-transformed back into the time domain:
+\begin{equation}
+\tilde{U}(\tau) = \mathrm{FT}^{-1} \left\lbrace |\tilde{U}(\omega)|\mathrm{e}^{i\psi(\omega)} \right\rbrace
+= \mathrm{FT}^{-1} \left\lbrace \frac{A(\omega)}{|\tilde{U}_r(\omega)|}\mathrm{e}^{i\psi_r(\omega)} \right\rbrace
 	\label{eq_field}
 \end{equation}
 \end{frame}
@@ -297,10 +315,31 @@ May be achieved with the use of a Mach-Zender interferometer
 \end{columns}
 \end{frame}
 
+%\begin{frame}
+%\begin{enumerate}
+%	\item acquire interferogram for each pixel at different delays
+%\end{enumerate}
+%\begin{figure}
+%	\includegraphics[scale=0.6]{imagesc2.eps}
+%\end{figure}
+%\end{frame}
+
 \begin{frame}
-\begin{itemize}
-	\item acquire interferogram for each pixel at different delays
-\end{itemize}
+\vspace{20pt}
+Isolate the cross-correlation between $U$ and $U_r^*$
+\vspace{-15pt}
+\begin{figure}
+	\includegraphics[scale=0.6]{gaussian_filter.eps}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\vspace{20pt}
+Isolate the cross-correlation between $U$ and $U_r^*$
+\vspace{-15pt}
+\begin{figure}
+	\includegraphics[scale=0.6]{phase_correction.eps}
+\end{figure}
 \end{frame}
 
 \section{Results}
