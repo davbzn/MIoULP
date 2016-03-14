@@ -22,7 +22,7 @@ fig1.suptitle(r'Phase correction', y=0.98, fontsize=15)
 ######
 # GRAFICO 1
 f1 = fig1.add_subplot(1, 1, 1)
-phase, = f1.plot(xfr0, ypha, '-', c='blue')
+phase, = f1.plot(xfr0, ypha, '-', c='orange')
 corrected, = f1.plot(xfr0, ycor, '-', c='red')
 
 f1.set_ylabel(r'Phase', labelpad=2, fontsize=14)

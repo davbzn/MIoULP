@@ -49,9 +49,9 @@
 \titlepage
 \end{frame}
 
-\begin{frame}{Outline}
-\tableofcontents
-\end{frame}
+%\begin{frame}{Outline}
+%\tableofcontents
+%\end{frame}
 
 \section{Introduction}
 \begin{frame}{Introduction}
@@ -134,56 +134,22 @@ May be achieved with the use of a Mach-Zender interferometer
 %\end{equation}
 %\end{frame}
 
-\begin{frame}{Interferogram}
-\vspace{-15pt}
-\begin{figure}
-	\centering
-	\includegraphics[scale=0.6]{interference2.eps}
-\end{figure}
-\vspace{-15pt}
-%\begin{align}
-%	I(\tau) 	&= \int|U(t)|^2\mathrm{d}t + \int|U_r(t)|^2\mathrm{d}t \nonumber\\
-%			&\quad + \int U(t)U_r^*(t-\tau)\mathrm{d}t + \int U^*(t)U_r(t-\tau)\mathrm{d}t 
-%	\label{eq_inter}
-%\end{align}
-\begin{equation}
-	I(\tau) 	= I_p + I_r + \int U(t)U_r^*(t-\tau)\mathrm{d}t + \int U^*(t)U_r(t-\tau)\mathrm{d}t 
-	\label{eq_inter}
-\end{equation}
-\end{frame}
-
-\begin{frame}{Spectrum and Phase}
-\vspace{-10pt}
-\begin{figure}
-	\centering
-	\includegraphics[scale=0.6]{spectrum_phase2.eps}
-\end{figure}
-\vspace{-20pt}
-%	FT\left\lbrace I(\tau)\right\rbrace 	&= 	FT\left\lbrace \int|U(t)|^2\mathrm{d}t + \int|U_r(t)|^2\mathrm{d}t\right\rbrace \nonumber \\
-%			&\quad + \tilde{U}(\omega)\tilde{U}_r^*(\omega) + \tilde{U}^*(-\omega)\tilde{U}_r(-\omega)
+\begin{frame}{Time complex field}
+Start from:
 \begin{align}
-FT\left\lbrace I(\tau)\right\rbrace 	&= 	FT\left\lbrace I_p + I_r \right\rbrace 
-+ \tilde{U}(\omega)\tilde{U}_r^*(\omega) + \tilde{U}^*(-\omega)\tilde{U}_r(-\omega)
+	I(\tau) 	&= I_p + I_r \nonumber\\
+			&\quad+ \int U(t)U_r^*(t-\tau)\mathrm{d}t + \int U^*(t)U_r(t-\tau)\mathrm{d}t 
+	\label{eq_inter}
+\end{align}
+Fourier-transform into the frequency domain:
+\begin{align}
+FT\left\lbrace I(\tau)\right\rbrace 	&= 	FT\left\lbrace I_p + I_r \right\rbrace \nonumber\\
+&\quad+ \tilde{U}(\omega)\tilde{U}_r^*(\omega) + \tilde{U}^*(-\omega)\tilde{U}_r(-\omega)
 	\label{eq_fourier}
 \end{align}
 \end{frame}
-
-\begin{frame}{Spectrum}
-\vspace{-15pt}
-\begin{figure}
-	\centering
-	\includegraphics[scale=0.6]{spectrum_zoom.eps}
-\end{figure}
-\vspace{-5pt}
-\begin{equation}
-\tilde{U}(\omega)\tilde{U}_r^*(\omega) = A(\omega) = |\tilde{U}(\omega)||\tilde{U}_r(\omega)|\mathrm{e}^{i[\psi(\omega)-\psi_r(\omega)]}
-	\label{eq_gauss}
-\end{equation}
-\end{frame}
-
-\begin{frame}{Time complex field}
-The complex field in the spectrum domain is
-
+\begin{frame}
+The complex field in the spectrum domain is:
 \begin{equation}
 \tilde{U}(\omega) = |\tilde{U}(\omega)|\mathrm{e}^{i\psi(\omega)} = \frac{A(\omega)}{|\tilde{U}_r(\omega)|}\mathrm{e}^{i\psi_r(\omega)}
 	\label{eq_field_spectral}
@@ -201,52 +167,57 @@ It can be Fourier-transformed back into the time domain:
 
 \section{Setup}
 \begin{frame}{Mach-Zender Interferometer}
-\begin{center}
-\begin{pspicture}(10,7)
-	\pnodes(0,6){IN}(10,3){OUT}
-	\pnodes(1,6){BSA}(5.5,3){BSB}
-	\pnodes(1,1){C}(2.5,1){D}(2.5,3){E}(4.5,3){Focus}
-	\pnodes(8,6){G}(8,4.5){H}(5.5,4.5){I}
-	
-	\addtopsstyle{OptComp}{mirrorwidth=1.5, mirrortype=extended}
-	\addtopsstyle{OptComp}{bssize=1, bsstyle=plate}
-	\addtopsstyle{Beam}{fillstyle=solid, fillcolor=red!50!white, linecolor=red, opacity=0.2}
-	
-	\beamsplitter(IN)(BSA)(C){BS1}
-	
-	\mirror(BSA)(C)(D){M1}
-	\mirror(C)(D)(E){M2}
-	\oapmirror[oapmirroraperture=1.3, mirrortype=extended](D)(E)(Focus){OAP}
-	\pinhole[outerheight=1,innerheight=0.1,phlinewidth=0.1](Focus)(Focus){PH}
-	
-	\beamsplitter(I)(BSB)(OUT){BS2}
-	
-	\mirror(BSA)(G)(H){M3}
-	\mirror(G)(H)(I){M4}
-	\mirror(H)(I)(BSB){M5}
-	
-	\drawwidebeam[beamwidth=0.4](IN){1-6}(OUT)
-	\drawwidebeam[beamwidth=0.4](IN)(BSA){7-9}{6}(OUT)
-	
-	\pnode(6,6){ND}
-	\optbox[optboxsize=0.2 1.3, labeloffset=1](BSA)(ND){ND filter}
-	\optbox[optboxsize=1.6 3.1](7,5.25)(9.2,5.25)
-	\rput[r](9.65,5.5){$\tau$\psline[arrows=<->](-0.65, -0.15)(0.35, -0.15)}
-	
-\end{pspicture}
-\end{center}
+	\begin{center}
+		\begin{pspicture}(10,7)
+			\pnodes(0,6){IN}(10,3){OUT}
+			\pnodes(1,6){BSA}(5.5,3){BSB}
+			\pnodes(1,1){C}(2.5,1){D}(2.5,3){E}(4.5,3){Focus}
+			\pnodes(8,6){G}(8,4.5){H}(5.5,4.5){I}
+			
+			\addtopsstyle{OptComp}{mirrorwidth=1.5, mirrortype=extended}
+			\addtopsstyle{OptComp}{bssize=1, bsstyle=plate}
+			\addtopsstyle{Beam}{fillstyle=solid, fillcolor=red!50!white, linecolor=red, opacity=0.2}
+			
+			\beamsplitter(IN)(BSA)(C){BS1}
+			
+			\mirror(BSA)(C)(D){M1}
+			\mirror(C)(D)(E){M2}
+			\oapmirror[oapmirroraperture=1.3, mirrortype=extended](D)(E)(Focus){OAP}
+			\pinhole[outerheight=1,innerheight=0.1,phlinewidth=0.1](Focus)(Focus){PH}
+			
+			\beamsplitter(I)(BSB)(OUT){BS2}
+			
+			\mirror(BSA)(G)(H){M3}
+			\mirror(G)(H)(I){M4}
+			\mirror(H)(I)(BSB){M5}
+			
+			\drawwidebeam[beamwidth=0.4](IN){1-6}(OUT)
+			\drawwidebeam[beamwidth=0.4](IN)(BSA){7-9}{6}(OUT)
+			
+			\pnode(6,6){ND}
+			\optbox[optboxsize=0.2 1.3, labeloffset=1](BSA)(ND){ND filter}
+			\optbox[optboxsize=1.6 3.1](7,5.25)(9.2,5.25)
+			\rput[r](9.65,5.5){$\tau$\psline[arrows=<->](-0.65, -0.15)(0.35, -0.15)}
+			\rput[r](7,6.5){moving platform}
+			
+			\rput[l](4.5,1.5){$\textbf{BS1-2}$ 50/50 beamsplitters}
+			\rput[l](4.5,1.1){$\textbf{M1-5}$ mirrors}
+			\rput[l](4.5,0.7){$\textbf{OAP}$ parabolic mirror}
+			\rput[l](4.5,0.3){$\textbf{PH}$ $\SI{20}{\um}$ pinhole}
+		\end{pspicture}
+	\end{center}
 \end{frame}
 
-\begin{frame}
-\textbf{Mach-Zender components}:\\
-\begin{itemize}
-	\item 2x broadband \textbf{beamsplitters} with AR coating (BS1, BS2)
-	\item 5x standard metal \textbf{mirrors} (M1, M2, M3, M4, M5)
-	\item 1x gold coated off-axis \textbf{parabolic mirror} (OAP)
-	\item 1x \SI{20}{\um} \textbf{pinhole} (PH)
-	\item 1x \textbf{moving platform} (Zaber attuator) with a \SI{0.047625}{\um} minimum step.
-\end{itemize}
-\end{frame}
+%\begin{frame}
+%\textbf{Mach-Zender components}:\\
+%\begin{itemize}
+%	\item 2x broadband \textbf{beamsplitters} with AR coating (BS1, BS2)
+%	\item 5x standard metal \textbf{mirrors} (M1, M2, M3, M4, M5)
+%	\item 1x gold coated off-axis \textbf{parabolic mirror} (OAP)
+%	\item 1x \SI{20}{\um} \textbf{pinhole} (PH)
+%	\item 1x \textbf{moving platform} (Zaber attuator) with a \SI{0.047625}{\um} minimum step.
+%\end{itemize}
+%\end{frame}
 
 \begin{frame}
 \textbf{Sources}:\\
@@ -264,7 +235,6 @@ It can be Fourier-transformed back into the time domain:
 \end{frame}
 
 \section{Data Analysis}
-
 \begin{frame}{Data Analysis}
 \begin{columns}[T,onlytextwidth]
 \column{.49\textwidth}
@@ -315,6 +285,53 @@ It can be Fourier-transformed back into the time domain:
 \end{columns}
 \end{frame}
 
+\begin{frame}{Interferogram}
+\vspace{-15pt}
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.6]{interference2.eps}
+\end{figure}
+\vspace{-15pt}
+%\begin{align}
+%	I(\tau) 	&= \int|U(t)|^2\mathrm{d}t + \int|U_r(t)|^2\mathrm{d}t \nonumber\\
+%			&\quad + \int U(t)U_r^*(t-\tau)\mathrm{d}t + \int U^*(t)U_r(t-\tau)\mathrm{d}t 
+%	\label{eq_inter}
+%\end{align}
+\begin{equation}
+	I(\tau) 	= I_p + I_r + \int U(t)U_r^*(t-\tau)\mathrm{d}t + \int U^*(t)U_r(t-\tau)\mathrm{d}t 
+	\label{eq_inter}
+\end{equation}
+\end{frame}
+
+\begin{frame}{Spectrum and Phase}
+\vspace{-15pt}
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.6]{spectrum_phase2.eps}
+\end{figure}
+\vspace{-5pt}
+%	FT\left\lbrace I(\tau)\right\rbrace 	&= 	FT\left\lbrace \int|U(t)|^2\mathrm{d}t + \int|U_r(t)|^2\mathrm{d}t\right\rbrace \nonumber \\
+%			&\quad + \tilde{U}(\omega)\tilde{U}_r^*(\omega) + \tilde{U}^*(-\omega)\tilde{U}_r(-\omega)
+\begin{equation}
+FT\left\lbrace I(\tau)\right\rbrace 	= 	FT\left\lbrace I_p + I_r \right\rbrace 
++ \tilde{U}(\omega)\tilde{U}_r^*(\omega) + \tilde{U}^*(-\omega)\tilde{U}_r(-\omega)
+	\label{eq_fourier}
+\end{equation}
+\end{frame}
+
+%\begin{frame}{Spectrum}
+%\vspace{-15pt}
+%\begin{figure}
+%	\centering
+%	\includegraphics[scale=0.6]{spectrum_zoom.eps}
+%\end{figure}
+%\vspace{-5pt}
+%\begin{equation}
+%\tilde{U}(\omega)\tilde{U}_r^*(\omega) = A(\omega) = |\tilde{U}(\omega)||\tilde{U}_r(\omega)|\mathrm{e}^{i[\psi(\omega)-\psi_r(\omega)]}
+%	\label{eq_gauss}
+%\end{equation}
+%\end{frame}
+
 %\begin{frame}
 %\begin{enumerate}
 %	\item acquire interferogram for each pixel at different delays
@@ -325,34 +342,41 @@ It can be Fourier-transformed back into the time domain:
 %\end{frame}
 
 \begin{frame}
-\vspace{20pt}
-Isolate the cross-correlation between $U$ and $U_r^*$
-\vspace{-15pt}
+%\vspace{20pt}
+%Isolate the cross-correlation between $U$ and $U_r^*$
+%\vspace{-15pt}
 \begin{figure}
 	\includegraphics[scale=0.6]{gaussian_filter.eps}
 \end{figure}
+\begin{equation}
+\tilde{U}(\omega)\tilde{U}_r^*(\omega) = A(\omega) = |\tilde{U}(\omega)||\tilde{U}_r(\omega)|\mathrm{e}^{i[\psi(\omega)-\psi_r(\omega)]}
+	\label{eq_gauss}
+\end{equation}
 \end{frame}
 
 \begin{frame}
-\vspace{20pt}
-Isolate the cross-correlation between $U$ and $U_r^*$
-\vspace{-15pt}
 \begin{figure}
 	\includegraphics[scale=0.6]{phase_correction.eps}
 \end{figure}
+\begin{equation}
+\Phi_{ND} = \frac{\omega}{c}(\mathrm{n}_{ND}(\omega)-\mathrm{n}_{air})\mathrm{L}_{ND}
+	\label{eq_ND_phase}
+\end{equation}
 \end{frame}
 
-\section{Results}
-\begin{frame}{Results for the Ti:S laser}
-
-\end{frame}
-\section{Conclusions}
+\section{Results & Conclusions}
 \begin{frame}{Conclusions}
+\textbf{Results}:\\
+	Phase correction does not work yet.
+
+	\vspace{5pt}
 \textbf{Improvements}:\\
 	\begin{itemize}
-		\item Use of corner cube retroreflectors (CCR) for better alignment
-		\item Use of piezo stage for better sampling, but worse range
+		\item Use transparent glass to balance the arms
 		\item Use 90/10 beamsplitter in place of 50/50 BS1
+		\item Use of piezo stage for better sampling, but worse range
+%		\vspace{5pt}
+		\item Use of corner cube retroreflectors (CCR) for better alignment
 	\end{itemize}
 	
 	\vspace{5pt}
