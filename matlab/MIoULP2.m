@@ -15,8 +15,8 @@ clear ans ans1 ans2
 %sett.divide = 5;
 
 % set graph visible or not
-%sett.graph  = false;
-sett.graph  = true;
+sett.graph  = false;
+%sett.graph  = true;
 
 %% set constants
 c_const     = 299792458;                                % m/s
@@ -27,8 +27,8 @@ ax.f_hene = c_const/ax.wl_hene;                         % f = c/wlen = 0.4739336
 ax.wl_800   = 800.0e-9;                                 % m
 ax.f_800    = c_const/ax.wl_800;                        % f = c/wlen = 0.374740572 × 10^15 Hz
 % wavelength and frequency relative to 760nm:
-ax.wl_800   = 760.0e-9;                                 % m
-ax.f_800    = c_const/ax.wl_760;                        % f = c/wlen = 0.394736842 × 10^14 Hz
+ax.wl_760   = 760.0e-9;                                 % m
+ax.f_760    = c_const/ax.wl_760;                        % f = c/wlen = 0.394736842 × 10^14 Hz
 
 arm.step_0  = mean(diff(arm.vect_0));
 
