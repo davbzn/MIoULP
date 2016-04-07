@@ -20,8 +20,15 @@
 \setbeamertemplate{navigation symbols}{} 
 \logo{\includegraphics[height=0.8cm]{Imperial_2_Pantones.eps}\vspace{233pt}\hspace{264pt}} 
 \institute{Imperial College London} 
-\date{16$^{\mathrm{th}}$ March 2016} 
+\date{15$^{\mathrm{th}}$ March 2016} 
 \subject{Ultrafast Metrology}
+
+\addtobeamertemplate{navigation symbols}{}{%
+    \usebeamerfont{footline}%
+    \usebeamercolor[fg]{footline}%
+    \hspace{1em}%
+    \insertframenumber/\inserttotalframenumber
+}
 
 \defbeamertemplate*{title page}{customized}[1][]{
 \vspace{24pt}
@@ -90,11 +97,15 @@
 \vspace{15pt}
 \textbf{Note}:\\
 Normally, characterisation of a single spatial point in time (1D).\\
-Can be extended to comprehend up to one spatial dimension (2D).
+Can be extended to include up to one spatial dimension (2D).
 \end{frame}
 
 \section{Fourier-Transform Spectral Interferometry}
 \begin{frame}{Fourier-Transform Spectral Interferometry}
+\textbf{Our target}:\\
+Obtain a full 3D characterisation of the laser pulse.
+
+\vspace{15pt}
 \textbf{Technique choosen}:\\
 Mix of interferometric techniques.
 Fourier-Transform Spectral Interferometry (FTSI) combined with a Mach-Zender interferometer and a SEA-F-SPIDER.\\
@@ -103,10 +114,6 @@ Fourier-Transform Spectral Interferometry (FTSI) combined with a Mach-Zender int
 	\item SEA-F-SPIDER characterise the reference pulse $U_r(\omega)$
 	\item FTSI obtains the time complex field through Fourier-transforms $U(\omega) \rightarrow U(\tau)$
 \end{itemize}
-
-\vspace{15pt}
-\textbf{Our target}:\\
-Obtain a full 3D characterisation of the laser pulse.
 %
 %\vspace{10pt}
 %May be achieved with the use of a Mach-Zender interferometer
@@ -147,6 +154,11 @@ FT\left\lbrace I(\tau)\right\rbrace 	&= 	FT\left\lbrace I_p + I_r \right\rbrace 
 &\quad+ \tilde{U}(\omega)\tilde{U}_r^*(\omega) + \tilde{U}^*(-\omega)\tilde{U}_r(-\omega)
 	\label{eq_fourier}
 \end{align}
+isolate the cross-correlation term:
+\begin{equation*}
+A(\omega) \equiv \tilde{U}(\omega)\tilde{U}_r^*(\omega)
+\end{equation*}
+
 \end{frame}
 \begin{frame}
 The complex field in the spectrum domain is:
@@ -359,7 +371,7 @@ FT\left\lbrace I(\tau)\right\rbrace 	= 	FT\left\lbrace I_p + I_r \right\rbrace
 	\includegraphics[scale=0.6]{phase_correction.eps}
 \end{figure}
 \begin{equation}
-\Phi_{ND} = i\frac{\omega}{c}(\mathrm{n}_{ND}(\omega)-\mathrm{n}_{air})\mathrm{L}_{ND}
+i\Phi_{ND} = i\frac{\omega}{c}(\mathrm{n}_{ND}(\omega)-\mathrm{n}_{air})\mathrm{L}_{ND}
 	\label{eq_ND_phase}
 \end{equation}
 \end{frame}
@@ -370,13 +382,13 @@ FT\left\lbrace I(\tau)\right\rbrace 	= 	FT\left\lbrace I_p + I_r \right\rbrace
 \end{figure}
 \vspace{-15pt}
 \begin{equation}
-\phi = i\frac{\omega}{c}\frac{x^2 + y^2}{2\Delta z}
+i\phi = i\frac{\omega}{c}\frac{x^2 + y^2}{2\Delta z}
 	\label{eq_paraboloid}
 \end{equation}
 \end{frame}
 
 \section{Results and Conclusions}
-\begin{frame}{Results}
+\begin{frame}{Results and Conclusions}
 \textbf{Results}:\\
 	Phase correction does not work yet.
 
@@ -389,12 +401,13 @@ FT\left\lbrace I(\tau)\right\rbrace 	= 	FT\left\lbrace I_p + I_r \right\rbrace
 		\vspace{5pt}
 		\item Use of corner cube retroreflectors (CCR) for better alignment
 	\end{itemize}
-	
+%	
 %	\vspace{5pt}
 %\textbf{Summary}:\\
-	
+%	Ultrafast laser metrology 
+%	I am happy of the experience gained working in a real research laboratory.
 \end{frame}
-\begin{frame}{Conclusions}
-Ultrafast laser metrology
-\end{frame}
+%\begin{frame}{Conclusions}
+%Ultrafast laser metrology
+%\end{frame}
 \end{document}

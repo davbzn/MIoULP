@@ -1,0 +1,41 @@
+\begin{figure}[ht]
+	\centering
+	\begin{pspicture}(14,10)
+		\pnodes(0,8){IN}(14,4){OUT}
+		\pnodes(2,8){BSA}(7,4){BSB}
+		\pnodes(2,2){C}(4,2){D}(4,4){E}(6,4){Focus}
+		\pnodes(11,8){G}(11,6){H}(7,6){I}
+		
+		\addtopsstyle{OptComp}{mirrorwidth=1.5, mirrortype=extended}
+		\addtopsstyle{OptComp}{bssize=1.5, bsstyle=plate}
+		\addtopsstyle{Beam}{fillstyle=solid, fillcolor=red!50!white, linecolor=red, opacity=0.2}
+		
+		\beamsplitter[labelangle=-135, labeloffset=1.5](IN)(BSA)(C){BS1}
+		
+		\mirror(BSA)(C)(D){M1}
+		\mirror(C)(D)(E){M2}
+		\oapmirror[oapmirroraperture=1.5, mirrortype=extended](D)(E)(Focus){OAP}
+		\pinhole[outerheight=1,innerheight=0.1,phlinewidth=0.1](Focus)(Focus){PH}
+		
+		\beamsplitter[labelangle=45, labeloffset=1.5](I)(BSB)(OUT){BS2}
+		
+		\mirror(BSA)(G)(H){M3}
+		\mirror(G)(H)(I){M4}
+		\mirror(H)(I)(BSB){M5}
+		
+		\drawwidebeam[beamwidth=0.4](IN){1-6}(OUT)
+		\drawwidebeam[beamwidth=0.4](IN)(BSA){7-9}{6}(OUT)
+		
+		\pnode(8,8){ND}
+		\optbox[optboxsize=0.2 1.3, labeloffset=1](BSA)(ND){ND filter}		
+		
+		\optbox[optboxsize=4 4](8,7)(14,7)
+		\rput[r](12.5,7.15){$\tau$\psline[arrows=<->](-0.65, -0.15)(0.35, -0.15)}
+		\rput[c](11,9.5){moving platform}
+		
+		\rput[l](0,8){IN}
+		\rput[r](14,4){OUT}
+	\end{pspicture}
+	\label{fig-MZ}
+	\caption{(Color Online) Mach-Zender interferometer: BS1 and BS2 are the two 50/50 broadband beamsplitter, M1-5 are plain metallic mirrors, PH is the \SI{20}{\um} pinhole, OAP is the off-axis parabolic gold-plated mirror and ND is a neutral density filter (or a stack of filters).}
+\end{figure}
