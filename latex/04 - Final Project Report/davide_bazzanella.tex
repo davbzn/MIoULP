@@ -24,12 +24,12 @@
 \input{cover.tex}
 \cleardoublepage
 \section*{Abstract}
-We replicate a method for multidimensional characterisation of ultrafast laser pulses.
+We replicate a method for multidimensional characterisation of ultrafast laser pulses with slight variation.
 The technique is based on Fourier transform spectral interferometry and is spatially resolved in three dimensions.
 
 The sample beam is interfered with a copy of itself delayed and passed through a pinhole, therefore spatially uniform.
 The interferogram is acquired on each pixel of a CMOS camera by scanning the delay between the sample and the reference pulse and allow us to gather high-resolution spatially resolved information on the phase difference between the two pulses.
-This information is then elaborated by mean of Fourier transform along with the spectral intensity and phase obtained with a SEA-F-SPIDER.
+This information is then elaborated by mean of Fourier transform along with the spectral ampliture and phase obtained with a SEA-F-SPIDER.
 
 The result is a complete characterisation of the original pulse in three spatial dimensions (or two plus time).
 \subsubsection*{Keywords:} Laser metrology, femtosecond pulses, ultrafast lasers, multidimensional characterisation, Fourier transform spectral interferometry
@@ -40,64 +40,86 @@ The result is a complete characterisation of the original pulse in three spatial
 \pagenumbering{arabic}
 \section{Introduction}
 Modern mode-locked lasers are able to generate ultrafast laser pulses with a duration down to few femtoseconds \cite{tamura93,schriever14,yu30} and with high repetition rates.
-Those pulses are too short to be characterised by any present-day detector, therefore autocorrelation, spectroscopic and interferometric techniques are largely used in laser metrology.
+Those pulses are too short to be characterised by any present-day detector, therefore correlation, spectrographic and interferometric techniques are largely used in laser metrology.
 
-** talk about those techniques **
+Autocorrelation and cross-correlation are by far the most used methods, because of their simplicity.
+These techniques are in fact the easiest techniques available, especially autocorrelation, but they allow to obtain only moderate information on the laser pulse.
+Also they often need to assume the shape of test pulse to estimate its duration.
 
-Autocorrelation techniques are the easiest techniques available, but they also allow only a superficial characterisation of the laser pulse.
+Among the spectrographic techniques, the most common one is the so called Frequency-Resolved Optical Gating (FROG).
+This method involves measuring the spectrum of the test pulse as a function of the delay between its replicas.
+Amplitude and phase information on the ultrashort pulse is then extracted using an interative-Fourier-transform algorithm.
 
-Frequency-Resolved Optical Gating (FROG) is a spectrographic method
+Spectral-Phase Interferometry for Direct Electric-field Reconstruction (SPIDER) is an implementaton of shearing interferometry and is the most known interferometric method.
+A SPIDER apparatus creates two replicas of the test pulse with a certain delay and mix them with the original pulse in a crystal with nonlinear properties (usually cut for Sum-Frequency Generation).
+The output from the crystal is then analysed with a spectrometer and the complete reconstruction of the pulse is obtained through a direct algebraic relation with the data.
+%tomography ?
 
-Spectral-Phase Interferometry for Direct Electric-field Reconstruction (SPIDER) is an interferometric method
+These techniques are usually implemented considering the laser pulse transversely homogeneous.
+This is often not the case, because distortions in the pulse spatial distribution may be introduced even by simple optical elements \cite{bor}.
 
-** talk about those techniques **
+Mutidimensional characterisation of a ultrafast laser pulse is often based on multiplexing of one of the forementione techniques.
+To give an example, SPIDER can be easily multiplexed to characterise one spatial dimension and the time dependence of the ultrafast pulse.
+FROG too can be scaled to allow also one spatial dimension characterisation.
 
-Those techniques are usually implemented considering the laser pulse transversely homogeneous.
-This is often not the case, because distortions in the pulse spatial distribution may be introduced even by the simplest optical element \cite{bor}.
-
-Mutidimensional characterisation of a ultrafast laser pulse is not simple: for example, the FROG and the SPIDER techniques can be scaled to allow one spatial dimension characterisation.\\
-\textit{Being able to obtain the 3D distribution of a laser pulse with those techniques is not as simple.}
+Full (3D) characterisation of an ultrafast laser pulse require further multiplexing or mixing different techniques into a more complex one.
 
 \subsection{Aims}
 
-The aim of this project is to obtain a complete spatial and temporal characterisation of an ultrafast laser pulse, that is a (3D) three dimensional characterisation.
+The aim of this project is to obtain a complete spatial and temporal characterisation of an ultrafast laser pulse, that is a three dimensional (3D) characterisation.
 %The aim of this project is to spatially and temporally characterise an ultrafast laser pulse of \SI{3.5}{\fs} duration.
-The source is a Ti:Sapphire laser which generates \SI{30}{\fs} pulses, successively spectrally broadened by a hollow core fiber and temporally compressed by broadband chirped mirrors into the final \SI{3.5}{\fs} pulse.
 
 Our plan is to build a Mach-Zender interferometer to obtain a spatially resolved interferogram of the laser pulse, and convert it to the frequency domain via Fourier transform.
-Then, by adding information on the frequency dependance of the phase and the intensity, gathered using the SEA-F-SPIDER already available in the laboratory, to characterise the beam spatial distribution in three dimensions.
+Then, by adding information on the frequency dependance of the phase and the amplitude, gathered using the SEA-F-SPIDER already available in the laboratory, we will characterise the beam spatial distribution in three dimensions.
 
+The source to sample is a Ti:Sapphire laser which generates \SI{30}{\fs} pulses, successively spectrally broadened by a hollow core fiber and temporally compressed by broadband chirped mirrors into the final \SI{3.5}{\fs} pulse with a bandwidth that spans from \SI{500}{\nm} to \SI{1000}{\nm}.
+
+\clearpage
 \section{Fourier transform spectral interferometry}
 Among the different techniques, we have chosen to develop a spatially resolved version of the Fourier transform spectral interferometry.
-This method is based on the interference between the test beam and a small homogeneous portion of a copy of itself.
-\subsection{Crosscorrelation interferometry}
+This method is based on the interference between the test beam and a reference beam, which is often a small homogeneous portion of a copy of the test pulse.
+
+\subsection{Cross-correlation interferometry}
 Consider an unknown laser pulse, its time complex field and the corresponding field in the spectral domain are given by
 \begin{gather}
 	U(t) = |U(t)|e^{i\phi(t)} \\
 	\tilde{U}(\omega) = |\tilde{U}(\omega)|e^{i\psi(\omega)}
 	\label{eq_def}
 \end{gather}
-The camera measure the intensity of the pulses over a time much longer than a single cycle, therefore we may write that for each delay $\tau$:
+which are linked together by Fourier transform $U(t) = \mathrm{FT}^{-1} \lbrace \tilde{U}(\omega) \rbrace$ and $\tilde{U}(\omega) = \mathrm{FT} \left\lbrace U(t) \right\rbrace$
+The camera measures the intensity of the pulses over a time much longer than a single cycle, therefore we may write that for each delay $\tau$:
 \begin{align}
-	I(\tau) 	&= \int|U(t)+U_r(t-\tau)|^2\mathrm{d}t \\
-			&= \int|U(t)|^2\mathrm{d}t + \int|U_r(t)|^2\mathrm{d}t\\
+	I(\tau) 	&= \int|U(t)+U_r(t-\tau)|^2\mathrm{d}t \nonumber\\
+			&= \int|U(t)|^2\mathrm{d}t + \int|U_r(t)|^2\mathrm{d}t \nonumber\\
 			&\quad + \int U(t)U_r^*(t-\tau)\mathrm{d}t + \int U^*(t)U_r(t-\tau)\mathrm{d}t 
 	\label{eq_autocorr}
 \end{align}
 As we can see the first two terms are actually just the irradiance of the test beam $I_0 = \int|U(t)|^2\mathrm{d}t$ and of the reference beam $I_r = \int|U_r(t)|^2\mathrm{d}t$ and are therefore constant for each value of delay $\tau$.
 
 Those component may be isolated and subtracted to the interferogram either by separate measurement or by removing the peak at $\omega = 0$ in the frequency domain.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=.9]{data/spectrum_linlog.eps}
+	\label{fig_spectrum}
+	\caption{(Color Online) Spectrum of the pulse in a lin-log scale, to enhance the presence of the two terms in simmetrical position respect to the center.}
+	\
+\end{figure}
+
 \subsection{Fourier transform spectral interferometry}
 A special case of the autocorrelation interferometry is the Fourier transform spectral interferometry.
 It is based on the information gathered by the autocorrelation interferometry.
 
 By applying the Fourier transform to Eq. (\ref{eq_autocorr}) we obtain
-\begin{equation}
-	\mathrm{FT}\lbrace I(\tau)\rbrace =
-	\mathrm{FT}\lbrace\int|U(t)|^2\mathrm{d}t + \int|U_r(t)|^2\mathrm{d}t\rbrace
+\begin{align}
+	\mathrm{FT} \lbrace I(\tau) \rbrace
+	&= \mathrm{FT} 	\left\lbrace	\int|U(t)|^2\mathrm{d}t + \int|U_r(t)|^2\mathrm{d}t +
+							\int U(t)U_r^*(t-\tau)\mathrm{d}t + \int U^*(t)U_r(t-\tau)\mathrm{d}t
+					\right\rbrace \nonumber\\
+	&= \mathrm{FT}	\left\lbrace \int|U(t)|^2\mathrm{d}t + \int|U_r(t)|^2\mathrm{d}t \right\rbrace
 	+ \tilde{U}(\omega)\tilde{U}_r^*(\omega)
 	+ \tilde{U}^*(-\omega)U_r(-\omega)
-\end{equation}
+\end{align}
 where $\tilde{U}(\omega)$ is the spectral domain complex field, as in Eq. (\ref{eq_def}).
 
 The first term is the Fourier transform of a constant and is represented in the frequency domain by a delta at $\omega = 0$.
@@ -111,29 +133,17 @@ and finally, we get
 	\tilde{U}(\omega) = |\tilde{U}(\omega)|e^{i\psi(\omega)} = \frac{A(\omega)}{|\tilde{U}_r^*(\omega)|}e^{i\psi_r(\omega)}
 \end{equation}
 
-\subsubsection{Multidimensional approach}
-\begin{equation}
-	\tilde{U}(x,y,\omega) = \frac{A(x,y,\omega)}{|\tilde{U}_r^*(x,y,\omega)|}e^{i\psi_r(x,y,\omega)}
-\end{equation}
-assumptions:
-\begin{itemize}
-\item the intensity of the reference beam is homogeneous in the transverse directions $|\tilde{U}(x,y,\omega)|=|\tilde{U}(x_0,y_0,\omega)|=|\tilde{U}(\omega)|$ where ($x_0$,$y_0$) are the coordinates of the center of the beam.
-\item the phase is separable as a spatial component and an angular frequency component:\\ $\psi_r(x,y,\omega) = \psi_{r,sp}(x,y)\psi_{r,\omega}(\omega)$
-\end{itemize}
-Then:
-\begin{equation}
-	\tilde{U}(x,y,\omega) \approx \frac{A(x,y,\omega)}{|\tilde{U}_r^*(\omega)|}e^{i\psi_r(x,y)}e^{i\psi_r(\omega)}
-\end{equation}
-
 \section{System setup}
 \subsection{Laser Pulses Source}
-**
-Our source of ultrafast laser pulses is a Ti:Sa laser which generates pulses of \SI{30}{\fs} with an energy of \SI{700}{\milli\J} at a repetition rate of \SI{1}{\kHz}.
-Those pulses successively are broadened in spectrum in a \SI{1}{\m} long hollow fibre and then compressed in time by ultrabroadband chirped mirrors, to obtain at the end of the process a ultrafast laser pulse of \SI{3.8}{\fs} duration and energy up to \SI{250}{\milli\J}.
+Our source of ultrafast laser pulses is a Ti:Sapphire laser which generates pulses of \SI{30}{\fs} with an energy of \SI{700}{\milli\J} at a repetition rate of \SI{1}{\kHz}.
+Those pulses are successively spectrally broadened in a \SI{1}{\m} long hollow fibre (\SI{250}{\um} inner core diameter) and then compressed in time by ultrabroadband chirped mirrors.
+The compression is eventually fine-tuned by a pair of fused silica wedges, to obtain at the end of the process an ultrafast laser pulse of \SI{3.8}{\fs} duration and energy up to \SI{250}{\milli\J}.
 
-**
-As prealignment tool we used an HeNe laser, generating a collimated red beam of wavelength $\lambda_{HeNe}=\SI{632.8}{\nm}$ with a long coherence length and small beam waist.
-**
+This source is rather unique and we had therefore to schedule its use compatibly with the other people in the research group.
+
+\subsubsection{HeNe CW laser}
+We also used a continuous wave HeNe laser, generating a collimated red beam of wavelength $\lambda_{HeNe}=\SI{632.8}{\nm}$.
+With its long coherence length and small beam waist was a useful prealignment tool.
 \clearpage
 \subsection{Mach-Zender interferometer}
 \input{system_scheme.tex}
@@ -147,18 +157,48 @@ the attuator had a backlash problem which we had to solve.
 Because we were working directly under a ventilation shaft we had to enclose the MZ in a box with *** black material to avoid disturbances due to the air movement.
 
 \subsection{SEA-F-SPIDER}
+In the laboratory a variation from the traditional SPIDER apparatus was already available: spatially encoded arrangement for direct electric field reconstruction by spectral shearing interferometry (SEA-SPIDER) with direct spatial filtering for ancilla preparation (SEA-F-SPIDER).
 
+This apparatus, compared to SPIDER, is particularly fitted for few-cycle pulse characterisation and is able to reconstruct the time dependence and the spatial distribution in one dimension of the pulse.
 
-\section{Data Processing}
+\section{Data Analysis}
+Our output data is composed by the interferograms of each pixel of the camera and from the amplitude and phase frequency dependence gathered by the SEA-F-SPIDER.
+All the interferograms are arranged in a big 3D matrix, whose dimension are given by the resolution of the sensor and the number of steps from the samplig in the delay line.
+Considering a 12-bit color (greyscale) depth and the original resolution of the camera ($2588\times 1940$), the memory usage of the raw data for 1024 sampling steps is more than 7 GB.
+To keep memory usage lower we binned together pixels in $4\times 4$ groups obtaining an effective resolution of $647\times 485$ and a reduction of a factor 16 in the memory usage.
+During the code developing and debugging phases we reduced the memory usage further by cropping the resolution to $201\times 201$ in the center of the sensor.
+\subsection{Multidimensional approach}
+\begin{equation}
+	\tilde{U}(x,y,\omega) = \frac{A(x,y,\omega)}{|\tilde{U}_r^*(x,y,\omega)|}e^{i\psi_r(x,y,\omega)}
+\end{equation}
+assumptions:
+\begin{itemize}
+\item the intensity of the reference beam is homogeneous in the transverse directions $|\tilde{U}(x,y,\omega)|=|\tilde{U}(x_0,y_0,\omega)|=|\tilde{U}(\omega)|$ where ($x_0$,$y_0$) are the coordinates of the center of the beam.
+\item the phase is separable as a spatial component and an angular frequency component:\\ $\psi_r(x,y,\omega) = \psi_{r,sp}(x,y)\psi_{r,\omega}(\omega)$
+\end{itemize}
+Then:
+\begin{equation}
+	\tilde{U}(x,y,\omega) \approx \frac{A(x,y,\omega)}{|\tilde{U}_r^*(\omega)|}e^{i\psi_r(x,y)}e^{i\psi_r(\omega)}
+\end{equation}
+
+The first assumption is valid because the reference beam is created by focusing the beam into a \SI{20}{\um} pinhole.
+This produces on the camera sensor an Airy pattern.
+As a first approximation the central area of the pattern may be considered homogeneous in intensity.
+This area is the Airy disk which has a radius given by
+$$\rho_s = 1.22 \frac{\lambda d}{D}$$
+where $\lambda$ is the wavelength, $d$ is the distance between the aperture and camera and $D$ is the diameter of the aperture.\\
+In our experiment the worst case values are $\lambda = \SI{500}{\nm}$, $D = \SI{20}{\um}$ and $d \approx \SI{300}{\mm}$ and give $\rho_s = \SI{9.15}{\mm}$ which is greater than both the height and the width of the sensor ($4 \times 6 \si{\mm}$)
+
+The second assumption helds if air is considered a non dispersive medium, which is true throughout this discussion
 \subsection{Diagram}
 \section{Results}
 \subsection{Simple case}
 \section{Conclusions}
 \subsection{Improvements}
-As a technical improvement corner cube rectroreflector should be used for a better alignment and less sensibility to the mirrors movement.
+As a technical improvement corner cube rectroreflector may be used for a better alignment and less sensibility to the mirrors movement.
 
 The use of corner cube retroreflectors, depending on the kind employed, may lead to parity problems, as the beam may not reflect the same number of times in both arms.
-In our system, though, this is not a problem, as the presence of the pinhole eliminate any symmetry problem
+In our system, though, this is not a problem, as the presence of the pinhole eliminate any symmetry problem.
 
 To eliminate the needs of a numerical phase correction there are two possible ways.
 A solution is to remove the filter and substitute the first beamsplitter with one which conveys more energy to the reference arm than to the test arm.
