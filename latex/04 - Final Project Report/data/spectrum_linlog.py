@@ -29,8 +29,8 @@ f1 = fig1.add_subplot(1, 1, 1)
 f1.set_yscale('log')
 spectrum, = f1.plot(xfr0, yspe/max(yspe), '-', c='blue')
 
-f1.set_ylabel(r'Intensity [a.u.]', labelpad=3, fontsize=14)
-f1.set_xlabel(r'Optical Frequency [PHz]', labelpad=2, fontsize=14)
+f1.set_ylabel(r'Intensity $I$ [a.u.]', labelpad=2, fontsize=14)
+f1.set_xlabel(r'Optical Frequency $\nu = \omega/2\pi$ [PHz]', labelpad=2, fontsize=14)
 
 f1.set_ylim((2e-5, 2))
 #f1.set_yticks(np.arange(-90, 1, 15))
@@ -38,7 +38,7 @@ f1.set_xlim((-1.75,1.75))
 
 f1.grid(True)
 
-f1.legend([spectrum, ], ('Spectrum\n intensity', ), loc='upper right')  
+f1.legend([spectrum, ], ('Spectrum\n amplitude', ), loc='upper right')  
 
 fig1.subplots_adjust(left=0.1, right=0.98, top=0.92, bottom=0.12, hspace=0.085, wspace=0.05)
 # mostra grafico

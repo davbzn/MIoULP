@@ -24,21 +24,24 @@
 \input{cover.tex}
 \cleardoublepage
 \section*{Abstract}
+%\begin{•}
 We replicate a method for multidimensional characterisation of ultrafast laser pulses with slight variation.
 The technique is based on Fourier transform spectral interferometry and is spatially resolved in three dimensions.
 
 The sample beam is interfered with a copy of itself delayed and passed through a pinhole, therefore spatially uniform.
 The interferogram is acquired on each pixel of a CMOS camera by scanning the delay between the sample and the reference pulse and allow us to gather high-resolution spatially resolved information on the phase difference between the two pulses.
-This information is then elaborated by mean of Fourier transform along with the spectral ampliture and phase obtained with a SEA-F-SPIDER.
+This information is then elaborated by mean of Fourier transform along with the spectral amplitude and phase obtained with a SEA-F-SPIDER.
 
 The result is a complete characterisation of the original pulse in three spatial dimensions (or two plus time).
 \subsubsection*{Keywords:} Laser metrology, femtosecond pulses, ultrafast lasers, multidimensional characterisation, Fourier transform spectral interferometry
+%\end{•}
 \cleardoublepage
 \tableofcontents
 
 \cleardoublepage
 \pagenumbering{arabic}
 \section{Introduction}
+%\begin{•}
 Modern mode-locked lasers are able to generate ultrafast laser pulses with a duration down to few femtoseconds \cite{tamura93,schriever14,yu30} and with high repetition rates.
 Those pulses are too short to be characterised by any present-day detector, therefore correlation, spectrographic and interferometric techniques are largely used in laser metrology.
 
@@ -63,9 +66,10 @@ To give an example, SPIDER can be easily multiplexed to characterise one spatial
 FROG too can be scaled to allow also one spatial dimension characterisation.
 
 Full (3D) characterisation of an ultrafast laser pulse require further multiplexing or mixing different techniques into a more complex one.
+%\end{}
 
 \subsection{Aims}
-
+%\begin{•}
 The aim of this project is to obtain a complete spatial and temporal characterisation of an ultrafast laser pulse, that is a three dimensional (3D) characterisation.
 %The aim of this project is to spatially and temporally characterise an ultrafast laser pulse of \SI{3.5}{\fs} duration.
 
@@ -73,6 +77,7 @@ Our plan is to build a Mach-Zender interferometer to obtain a spatially resolved
 Then, by adding information on the frequency dependance of the phase and the amplitude, gathered using the SEA-F-SPIDER already available in the laboratory, we will characterise the beam spatial distribution in three dimensions.
 
 The source to sample is a Ti:Sapphire laser which generates \SI{30}{\fs} pulses, successively spectrally broadened by a hollow core fiber and temporally compressed by broadband chirped mirrors into the final \SI{3.5}{\fs} pulse with a bandwidth that spans from \SI{500}{\nm} to \SI{1000}{\nm}.
+%\end{}
 
 \clearpage
 \section{Fourier transform spectral interferometry}
@@ -80,6 +85,7 @@ Among the different techniques, we have chosen to develop a spatially resolved v
 This method is based on the interference between the test beam and a reference beam, which is often a small homogeneous portion of a copy of the test pulse.
 
 \subsection{Cross-correlation interferometry}
+%\begin{•}
 Consider an unknown laser pulse, its time complex field and the corresponding field in the spectral domain are given by
 \begin{gather}
 	U(t) = |U(t)|e^{i\phi(t)} \\
@@ -87,87 +93,162 @@ Consider an unknown laser pulse, its time complex field and the corresponding fi
 	\label{eq_def}
 \end{gather}
 which are linked together by Fourier transform $U(t) = \mathrm{FT}^{-1} \lbrace \tilde{U}(\omega) \rbrace$ and $\tilde{U}(\omega) = \mathrm{FT} \left\lbrace U(t) \right\rbrace$
-The camera measures the intensity of the pulses over a time much longer than a single cycle, therefore we may write that for each delay $\tau$:
+
+Cross-correlation interferometry considers the pattern given by the intensity of the interference between two fields with a relative delay $\tau$.
+The sensor measures the intensity of the fields over a time much longer than a single cycle, therefore we may write:
 \begin{align}
-	I(\tau) 	&= \int|U(t)+U_r(t-\tau)|^2\mathrm{d}t \nonumber\\
-			&= \int|U(t)|^2\mathrm{d}t + \int|U_r(t)|^2\mathrm{d}t \nonumber\\
-			&\quad + \int U(t)U_r^*(t-\tau)\mathrm{d}t + \int U^*(t)U_r(t-\tau)\mathrm{d}t 
-	\label{eq_autocorr}
+	I(\tau) 	&= \int|U_1(t)+U_2(t-\tau)|^2\mathrm{d}t \nonumber\\
+			&= \int|U_1(t)|^2\mathrm{d}t + \int|U_2(t)|^2\mathrm{d}t \nonumber\\
+			&\quad + \int U_1(t)U_2^*(t-\tau)\mathrm{d}t + \int U_1^*(t)U_2(t-\tau)\mathrm{d}t 
+	\label{eq_xcorr}
 \end{align}
-As we can see the first two terms are actually just the irradiance of the test beam $I_0 = \int|U(t)|^2\mathrm{d}t$ and of the reference beam $I_r = \int|U_r(t)|^2\mathrm{d}t$ and are therefore constant for each value of delay $\tau$.
+As we can see the first two terms are actually just the irradiance of the first beam $I_1 = \int|U_1(t)|^2\mathrm{d}t$ and of the second beam $I_2 = \int|U_2(t)|^2\mathrm{d}t$ and are therefore constant for each value of delay $\tau$.
 
-Those component may be isolated and subtracted to the interferogram either by separate measurement or by removing the peak at $\omega = 0$ in the frequency domain.
+Those component may be isolated and subtracted to the interferogram either by separate measurements or by removing the peak at $\omega = 0$ in the frequency domain.
 
-\begin{figure}[ht]
-	\centering
-	\includegraphics[scale=.9]{data/spectrum_linlog.eps}
-	\label{fig_spectrum}
-	\caption{(Color Online) Spectrum of the pulse in a lin-log scale, to enhance the presence of the two terms in simmetrical position respect to the center.}
-	\
-\end{figure}
+The last two terms correlate the two fields together and afterwards may be adapted differently according to the approach chosen.
+%\end{}
 
 \subsection{Fourier transform spectral interferometry}
-A special case of the autocorrelation interferometry is the Fourier transform spectral interferometry.
-It is based on the information gathered by the autocorrelation interferometry.
+%\begin{•}
+A special case of the cross-correlation interferometry is the test-plus-reference interferometry which tries to gather information on a test field $U(t)$ by correlating its interference pattern with a reference (known) field $U_r(t)$.
+Our method, Fourier transform spectral interferometry, is the most common form of test-plus-reference interferometry.
 
-By applying the Fourier transform to Eq. (\ref{eq_autocorr}) we obtain
+Starting from cross-correlation intensity information and applying the Fourier transform to Eq. (\ref{eq_xcorr}) we obtain
+%\begin{align}
+%	\mathrm{FT} \lbrace I(\tau) \rbrace
+%	&= \mathrm{FT} 	\left\lbrace	\int|U(t)|^2\mathrm{d}t + \int|U_r(t)|^2\mathrm{d}t +
+%							\int U(t)U_r^*(t-\tau)\mathrm{d}t + \int U^*(t)U_r(t-\tau)\mathrm{d}t
+%					\right\rbrace \nonumber\\
+%	&= \mathrm{FT}	\left\lbrace \int|U(t)|^2\mathrm{d}t + \int|U_r(t)|^2\mathrm{d}t \right\rbrace
+%	+ \tilde{U}(\omega)\tilde{U}_r^*(\omega)
+%	+ \tilde{U}^*(-\omega)U_r(-\omega)
+%	\label{eq_FTspectrum}
+%\end{align}
 \begin{align}
 	\mathrm{FT} \lbrace I(\tau) \rbrace
-	&= \mathrm{FT} 	\left\lbrace	\int|U(t)|^2\mathrm{d}t + \int|U_r(t)|^2\mathrm{d}t +
-							\int U(t)U_r^*(t-\tau)\mathrm{d}t + \int U^*(t)U_r(t-\tau)\mathrm{d}t
+	&= \mathrm{FT} 	\left\lbrace	
+						\int|U(t)|^2\mathrm{d}t + \int|U_r(t)|^2\mathrm{d}t
 					\right\rbrace \nonumber\\
-	&= \mathrm{FT}	\left\lbrace \int|U(t)|^2\mathrm{d}t + \int|U_r(t)|^2\mathrm{d}t \right\rbrace
-	+ \tilde{U}(\omega)\tilde{U}_r^*(\omega)
+	&+
+		\mathrm{FT}	\left\lbrace	
+						\int U(t)U_r^*(t-\tau)\mathrm{d}t
+					\right\rbrace
+	+	\mathrm{FT}	\left\lbrace	
+						\int U^*(t)U_r(t-\tau)\mathrm{d}t
+					\right\rbrace \\
+	\label{eq_FTspectrum}
+\end{align}
+which, employing the convolution theorem, can be written as
+\begin{align}
+	\mathrm{FT} \lbrace I(\tau) \rbrace
+	&= \mathrm{FT}	\left\lbrace \int|U(t)|^2\mathrm{d}t + \int|U_r(t)|^2\mathrm{d}t \right\rbrace \nonumber \\
+	&+ \tilde{U}(\omega)\tilde{U}_r^*(\omega)
 	+ \tilde{U}^*(-\omega)U_r(-\omega)
+	\label{eq_FTspectrum1}
 \end{align}
 where $\tilde{U}(\omega)$ is the spectral domain complex field, as in Eq. (\ref{eq_def}).
 
-The first term is the Fourier transform of a constant and is represented in the frequency domain by a delta at $\omega = 0$.
+The first term is the Fourier transform of a constant and is represented in the frequency domain by a peak at $\omega = 0$.
 The second and third terms are represented by two peaks around $\omega_0$ and $-\omega_0$, where $\omega_0$ the main frequency of the pulse.
-Considering only the second term, which can be isolated from the term at zero and at $-\omega$, it may be rewritten as:
-\begin{equation}
-	A(\omega)=|\tilde{U}(\omega)||\tilde{U}_r^*(\omega)|e^{i[\psi(\omega)-\psi_r(\omega)]}
-\end{equation}
-and finally, we get
+Figure (\ref{fig_spectrum}) is a representation from actual data in a lin-log scale of the spectrum amplitude.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=.9]{data/spectrum_linlog.eps}
+	\caption{(Color Online) Spectrum amplitude of the interference pattern as a function of optical frequency $\nu$, in a lin-log scale to enhance the presence of the two terms in simmetrical position respect to the center.}
+	\label{fig_spectrum}
+\end{figure}
+
+Considering only the second term, which can be isolated from the term at zero and its symmetric at $-\omega$, we can define:
+\begin{align}
+	A(\omega) 	&\equiv \mathrm{FT} \left\lbrace \int U(t)U_r^*(t-\tau)\mathrm{d}t \right\rbrace \\
+				&= \tilde{U}(\omega)\tilde{U}_r^*(\omega) \nonumber\\
+				&= |\tilde{U}(\omega)||\tilde{U}_r^*(\omega)|e^{i[\psi(\omega)-\psi_r(\omega)]}
+\end{align}
+%\begin{equation}
+%	A(\omega) \equiv |\tilde{U}(\omega)||\tilde{U}_r^*(\omega)|e^{i[\psi(\omega)-\psi_r(\omega)]}
+%\end{equation}
+from which we can eventually get:
 \begin{equation}
 	\tilde{U}(\omega) = |\tilde{U}(\omega)|e^{i\psi(\omega)} = \frac{A(\omega)}{|\tilde{U}_r^*(\omega)|}e^{i\psi_r(\omega)}
 \end{equation}
 
+The steps described work for an ideal setup and for a one dimensional characterisation.
+We will expand the theoretical description later in the subsection \textit{Multidimensional approach} of section \ref{sec_data_analysis}.
+%\end{}
+
 \section{System setup}
-\subsection{Laser Pulses Source}
+\subsection{Ultrafast laser pulses source}
+%\begin{•}
 Our source of ultrafast laser pulses is a Ti:Sapphire laser which generates pulses of \SI{30}{\fs} with an energy of \SI{700}{\milli\J} at a repetition rate of \SI{1}{\kHz}.
 Those pulses are successively spectrally broadened in a \SI{1}{\m} long hollow fibre (\SI{250}{\um} inner core diameter) and then compressed in time by ultrabroadband chirped mirrors.
 The compression is eventually fine-tuned by a pair of fused silica wedges, to obtain at the end of the process an ultrafast laser pulse of \SI{3.8}{\fs} duration and energy up to \SI{250}{\milli\J}.
 
-This source is rather unique and we had therefore to schedule its use compatibly with the other people in the research group.
+The ultrafast laser pulse is generated on an optical table and then conveyed to our system, which is on a different optical table, through reflective optics only.
 
-\subsubsection{HeNe CW laser}
+This source is rather unique and we had therefore to schedule its use compatibly with the other people in the research group.
+%\end{}
+
+\subsubsection*{HeNe CW laser}
+%\begin{•}
 We also used a continuous wave HeNe laser, generating a collimated red beam of wavelength $\lambda_{HeNe}=\SI{632.8}{\nm}$.
 With its long coherence length and small beam waist was a useful prealignment tool.
-\clearpage
+%\end{}
+
 \subsection{Mach-Zender interferometer}
+%\begin{•}
 \input{system_scheme.tex}
+\subsubsection*{Components}
+\begin{itemize}
+	\item 5$\times$ Ø1" metallic mirrors (M1, M2, M3, M4, M5)
+	\item 1$\times$ Ø1" 90 off-axis parabolic mirror, protected gold coated (OAP)
+	\item 2$\times$ Ø1" broadband 50/50 beamsplitter with antireflection coating
+	\item 1$\times$ \SI{20}{\um} pinhole
+	\item 1$\times$ moving platform with Zaber T-NA08 A 25 actuator
+	\item 1$\times$ Allied Vision Guppy Pro F503B 12-bit 5MPixel CMOS camera
+	\item 2$\times$ neutral density (ND) filters
+	\item 1$\times$ 11$\times$16" steel breadboard
+\end{itemize}
+All the components have been fixed on the breadbord with common clamps, screws and washers.
+All the mirrors have been mounted on pillars of the same height, exept for the two positioned on the the moving platform (M3, M4).
+Those two mirrors, the beamsplitters and the pinhole have been mounted on pillars of different height to keep the center of the optical elements approssimately at the same height throughout the beam path.
 
-The two arms of the interferometer have two mirrors to avoid retroreflection into the laser cavity.
+\subsubsection*{Assembling}
+%\begin{•}
+The Mach-Zender interferometer was initially assembled with six plain mirrors and no pinhole.
+To test the rough alignment of the two output beam, we used the HeNe gaussian beam because of its small waist and because it is relatively safer than the Ti:Sapphire.
+Each arm had three mirrors to preserve the mirroring parity and to avoid retroreflection into the laser cavity.
 
-We decided to keep the reference arm fixed and build the moving platform in the test arm.
+Because we were working directly under a ventilation shaft we had to enclose the MZ in a box of black hardboard to avoid disturbances due to the air movement.
 
-the attuator had a backlash problem which we had to solve.
+Due to the difficulties in alignment of the beam with the axis of movement of the platform, we decided to keep the reference arm fixed and build the moving platform in the test arm.
+This choice avoided the problem of focusing the beam into the pinhole for every step of the platform.
 
-Because we were working directly under a ventilation shaft we had to enclose the MZ in a box with *** black material to avoid disturbances due to the air movement.
+After a preliminary stage we removed a plane mirror from one of the two arms and replaced with an off-axis parabolic mirror and a pinhole.
+
+%\end{}
 
 \subsection{SEA-F-SPIDER}
+%\begin{•}
 In the laboratory a variation from the traditional SPIDER apparatus was already available: spatially encoded arrangement for direct electric field reconstruction by spectral shearing interferometry (SEA-SPIDER) with direct spatial filtering for ancilla preparation (SEA-F-SPIDER).
 
 This apparatus, compared to SPIDER, is particularly fitted for few-cycle pulse characterisation and is able to reconstruct the time dependence and the spatial distribution in one dimension of the pulse.
+%\end{}
 
+\clearpage
 \section{Data Analysis}
+\label{sec_data_analysis}
+%\begin{•}
 Our output data is composed by the interferograms of each pixel of the camera and from the amplitude and phase frequency dependence gathered by the SEA-F-SPIDER.
 All the interferograms are arranged in a big 3D matrix, whose dimension are given by the resolution of the sensor and the number of steps from the samplig in the delay line.
 Considering a 12-bit color (greyscale) depth and the original resolution of the camera ($2588\times 1940$), the memory usage of the raw data for 1024 sampling steps is more than 7 GB.
 To keep memory usage lower we binned together pixels in $4\times 4$ groups obtaining an effective resolution of $647\times 485$ and a reduction of a factor 16 in the memory usage.
 During the code developing and debugging phases we reduced the memory usage further by cropping the resolution to $201\times 201$ in the center of the sensor.
+%\end{}
+
 \subsection{Multidimensional approach}
+%\begin{•}
 \begin{equation}
 	\tilde{U}(x,y,\omega) = \frac{A(x,y,\omega)}{|\tilde{U}_r^*(x,y,\omega)|}e^{i\psi_r(x,y,\omega)}
 \end{equation}
@@ -190,11 +271,23 @@ where $\lambda$ is the wavelength, $d$ is the distance between the aperture and 
 In our experiment the worst case values are $\lambda = \SI{500}{\nm}$, $D = \SI{20}{\um}$ and $d \approx \SI{300}{\mm}$ and give $\rho_s = \SI{9.15}{\mm}$ which is greater than both the height and the width of the sensor ($4 \times 6 \si{\mm}$)
 
 The second assumption helds if air is considered a non dispersive medium, which is true throughout this discussion
-\subsection{Diagram}
-\section{Results}
-\subsection{Simple case}
+%\end{}
+
+\subsection{Code development}
+%\begin{}
+\subsubsection*{Acquisition code}
+we controlled the apparatus through MATLAB script
+after the first data acquisitions we discovered that the attuator corrupted the first points of the data due to its backlash at the initial position.
+We solved the problem by moving the attuator further back and forcing him to take a few steps in the right direction before placing it on the first sampling position.
+
+\subsubsection*{Processing code}
+data was processed with a second MATLAB script
+%\end{}
+
+\clearpage
 \section{Conclusions}
 \subsection{Improvements}
+%\begin{•}
 As a technical improvement corner cube rectroreflector may be used for a better alignment and less sensibility to the mirrors movement.
 
 The use of corner cube retroreflectors, depending on the kind employed, may lead to parity problems, as the beam may not reflect the same number of times in both arms.
@@ -210,9 +303,23 @@ Both solutions lead to the generation of a interferogram with thinner fringes.
 This is a problem because the attuator we used in the esperiment has a minimum step of \SI{47.625}{\nm}, which is not enough small for the resolution required by the new interferogram.
 
 *** formula per calcolare il minimo step richiesto ***
+%\end{}
 
+\subsection{Personal considerations}
+%\begin{}
+Much time was spent in aligning the output beams, moving mirrors
 
-\subsection{Summary}
+due to the precision required by such extreme condition (\si{\fs}, \si{\nm})
+
+At the beginning, I had to become familiar with the environment and the equipement in the
+laboratory.
+
+working in an actual research environment
+
+even though we did not obtain the results we did hope to
+
+formative experience
+%\end{}
 
 \clearpage
 \input{bibliography.tex}
