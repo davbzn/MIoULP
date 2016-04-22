@@ -31,14 +31,12 @@
 \cleardoublepage
 \section*{Abstract}
 %\begin{•}
-We replicate a method for multidimensional characterisation of ultrafast laser pulses with slight variation.
+We replicate a method for multidimensional characterisation of ultrafast laser pulses\cite{miranda} with slight variation.
 The technique is based on Fourier transform spectral interferometry and is spatially resolved in three dimensions.
 
 The sample beam is interfered with a delayed copy of itself, passed through a pinhole, therefore spatially uniform.
 The interferogram is acquired on each pixel of a CMOS camera by scanning the delay between the sample and the reference pulse and it allows us to gather high-resolution spatially resolved information on the phase difference between the two pulses.
-This information is then elaborated by mean of Fourier transform along with the spectral amplitude and phase obtained with a SEA-F-SPIDER.
-
-The result is a complete characterisation of the original pulse in three spatial dimensions (or two plus time).
+This information is then elaborated by mean of Fourier transform along with the spectral amplitude and phase obtained with a SEA-F-SPIDER to obtain a complete characterisation of the original pulse in three spatial dimensions (or two plus time).
 \subsubsection*{Keywords:} Laser metrology, femtosecond pulses, ultrafast lasers, multidimensional characterisation, Fourier transform spectral interferometry
 %\end{•}
 \cleardoublepage
@@ -57,7 +55,7 @@ Also they often need to assume the shape of test pulse to estimate its duration.
 
 Among the spectrographic techniques, the most common one is the so called Frequency-Resolved Optical Gating (FROG).
 This method involves measuring the spectrum of the test pulse as a function of the delay between its replicas.
-Amplitude and phase information on the ultrashort pulse is then extracted using an interative-Fourier-transform algorithm.
+Amplitude and phase information on the ultrashort pulse is then extracted using an iterative-Fourier-transform algorithm.
 
 Spectral-Phase Interferometry for Direct Electric-field Reconstruction (SPIDER) is an implementaton of shearing interferometry and is the most known interferometric method.
 A SPIDER apparatus creates two replicas of the test pulse with a certain delay and mixes them with the original pulse in a crystal with nonlinear properties (usually cut for Sum-Frequency Generation).
@@ -67,9 +65,9 @@ The output from the crystal is then analysed with a spectrometer and the complet
 These techniques are usually implemented considering the laser pulse as transversely homogeneous.
 This is often not the case, because distortions in the pulse spatial distribution may be introduced even by simple optical elements \cite{bor}.
 
-Mutidimensional characterisation of a ultrafast laser pulse is often based on multiplexing of one of the forementione techniques.
+Mutidimensional characterisation of a ultrafast laser pulse is often based on multiplexing of one of the forementioned techniques.
 To give an example, SPIDER can be easily multiplexed to characterise one spatial dimension and the time dependence of the ultrafast pulse.
-FROG too can be scaled to allow also one spatial dimension characterisation.
+Also FROG can be scaled to allow the characterisation of one spatial dimension too.
 
 Full (3D) characterisation of an ultrafast laser pulse requires further multiplexing or mixing different techniques into a more complex one.
 %\end{}
@@ -109,8 +107,7 @@ Since the sensor measures the intensity of the fields over a time much longer th
 	\label{eq_xcorr}
 \end{align}
 As we can see the first two terms are actually just the irradiance of the first beam $I_1 = \int|U_1(t)|^2\mathrm{d}t$ and of the second beam $I_2 = \int|U_2(t)|^2\mathrm{d}t$ and are therefore constant for each value of delay $\tau$.
-
-Those component may be isolated and subtracted to the interferogram either by separate measurements or by removing the peak at $\omega = 0$ in the frequency domain.
+Those components may be isolated and subtracted to the interferogram either by separate measurements or by removing the peak at $\omega = 0$ in the frequency domain.
 
 The last two terms correlate the two fields together and afterwards may be adapted differently according to the approach chosen.
 %\end{}
@@ -185,6 +182,7 @@ The steps described work for an ideal setup and for a one dimensional characteri
 We will expand the theoretical description later in the subsection \textit{Multidimensional approach} of section \ref{sec_data_analysis}.
 %\end{}
 
+\clearpage
 \section{System setup}
 \subsection{Ultrafast laser pulses source}
 %\begin{•}
@@ -192,7 +190,7 @@ Our source of ultrafast laser pulses is a Ti:Sapphire laser which generates puls
 These pulses are successively spectrally broadened in a \SI{1}{\m} long hollow fibre (\SI{250}{\um} inner core diameter) and then compressed in time by ultrabroadband chirped mirrors.
 The compression is eventually fine-tuned by a pair of fused silica wedges, to obtain at the end of the process an ultrafast laser pulse of \SI{3.8}{\fs} duration and energy up to \SI{250}{\milli\J}.
 
-The ultrafast laser pulse is generated on an optical table and then conveyed to our system, which is on a different optical table, through reflective optics only.
+The ultrafast laser pulse is generated on an optical table and then, through reflective optics only, conveyed to our system, which is on a different optical table.
 
 This source is rather unique and we had therefore to schedule its use compatibly with the other people in the research group.
 % and also to be assisted by our supervisor.
@@ -218,8 +216,8 @@ The replica and the test pulse are temporally separated by a relative delay witc
 \begin{itemize}
 	\item 5$\times$ Ø1" metallic mirrors (M1, M2, M3, M4, M5)
 	\item 1$\times$ Ø1" 90 off-axis parabolic mirror, protected gold coated (OAP)
-	\item 2$\times$ Ø1" broadband 50/50 beamsplitter with antireflection coating
-	\item 1$\times$ \SI{20}{\um} pinhole
+	\item 2$\times$ Ø1" broadband 50/50 beamsplitter with antireflection coating (BS1, BS2)
+	\item 1$\times$ \SI{20}{\um} pinhole (PH)
 	\item 1$\times$ moving platform with Zaber T-NA08 A 25 actuator
 	\item 1$\times$ Allied Vision Guppy Pro F503B 12-bit 5MPixel CMOS camera
 	\item 2$\times$ neutral density (ND) filters
@@ -238,14 +236,13 @@ Each arm had three mirrors to preserve the mirroring parity and to avoid retrore
 
 Due to the difficulties in alignment of the beam with the axis of movement of the platform, we decided to keep the reference arm fixed and build the moving platform in the test arm.
 This choice avoided the problem of focusing the beam into the pinhole for every step of the platform.
-In fact even the smallest misalignment between the beam path and the axis movement of the platform could move the beam from the center of the pinhole to the side, causing the loss of a high fraction of the reference beam energy
-causing loss of energy from the reference beam.
-Keeping the energies of the two beams at approximately the same value is a crytical issue because it is related to the fringes contrast: a high difference means low contrast and therefore high noise in the data.
+In fact even the smallest misalignment between the beam path and the axis movement of the platform could move the beam from the center of the pinhole to the side, causing the loss of a high fraction of the reference beam energy.
+Keeping the energies of the two beams at approximately the same value is a critical issue because it is related to the fringes contrast: a high difference means low contrast and therefore high noise in the data.
 Consequently we removed the last plane mirror from the reference arm and replaced it with an off-axis parabolic mirror and a pinhole.
 After a preliminary stage of alignment carried out with the HeNe laser, we started working with the Ti:Sapphire pulsed light.
 
 At the end of the assembling phase we enclosed the breadboard in a box of black hardboard to block stray or unwanted light and avoid  disturbances due to the air movement, because we were working almost directly under a ventilation shaft.
-This removed sensibly vibration in the acquired data and allowed us to reduce the number of picture taken for each sampling step, thus spending less time for the whole acquisition.
+This removed sensibly vibration in the acquired data and allowed us to reduce the number of pictures taken for each sampling step, thus spending less time for the whole acquisition.
 %\end{}
 
 \subsubsection*{Zero delay position}
@@ -272,7 +269,7 @@ Both arms had approximately the same length but we had to improve our accuracy u
 
 In Figure (\ref{fig_interference}) and (\ref{photo_interference}) are represented the spatial fringes obtained for a point near the zero delay position.
 They are caused by the fact that the reference beam has a different delay depending on the position on the sensor.
-In fact after the pinhole, the reference beam is well modeled by a paraboloid wave.
+In fact, after the pinhole, the reference beam is well modeled by a paraboloid wave.
 
 To obtain a high fringes contrast as in the figures above, the energy in the two arms should be as similar as possible.
 Our beamsplitter (BS1) divided the beam equally in the two arms.
@@ -320,11 +317,11 @@ For this reason the reference beam is made spatially homogeneous by the off-axis
 Hence we can make the following assumptions:
 \begin{itemize}
 \item the intensity of the reference beam is homogeneous in the transverse directions $|\tilde{U}(x,y,\omega)|=|\tilde{U}(x_0,y_0,\omega)|=|\tilde{U}(\omega)|$ where ($x_0$,$y_0$) are the coordinates of the center of the beam.
-\item the phase is separable as a spatial component and an angular frequency component:\\ $\psi_r(x,y,\omega) = \psi_{r,sp}(x,y)\psi_{r,\omega}(\omega)$
+\item the phase is separable as a spatial component and an angular frequency component:\\ $\psi_r(x,y,\omega) = \psi_{r,sp}(x,y,\omega)\psi_{r,\omega}(\omega)$
 \end{itemize}
 Then:
 \begin{equation}
-	\tilde{U}(x,y,\omega) \approx \frac{A(x,y,\omega)}{|\tilde{U}_r^*(\omega)|}e^{i\psi_r(x,y)}e^{i\psi_r(\omega)}
+	\tilde{U}(x,y,\omega) \approx \frac{A(x,y,\omega)}{|\tilde{U}_r^*(\omega)|}e^{i\psi_r(x,y,\omega)}e^{i\psi_r(\omega)}
 \end{equation}
 
 The first assumption is valid because the reference beam is created by focusing the beam into a \SI{20}{\um} pinhole.
@@ -336,12 +333,13 @@ where $\lambda$ is the wavelength, $d$ is the distance between the aperture and 
 In our experiment the worst case values are $\lambda = \SI{500}{\nm}$, $D = \SI{20}{\um}$ and $d \approx \SI{300}{\mm}$ and give $\rho_s = \SI{9.15}{\mm}$ which is greater than both the height and the width of the sensor ($4 \times 6 \si{\mm}$)
 
 \clearpage
-The second assumption helds if air is considered as a non dispersive medium, which is true throughout this discussion.
+The second assumption is motivated by the fact that we are not in possess of a complete spatial characterisation of the reference phase.
 This allows us to remove the transverse spatial dependence of the phase directly in the frequency domain.
+Furthermore air is considered as a non dispersive medium (throughout the whole discussion).
 
 Considering the spherical wave generated by the pinhole, we can apply the Fresnel approximation for the medium-far field to obtain a paraboloid wave which is modeled by:
 \begin{equation*}
-U(x,y,z) \approx \frac{A}{z}e^{-ikz}e^{ik\frac{x^2+y^2}{2z}}
+U(x,y,z) \simeq \frac{A}{z}e^{-ikz}e^{ik\frac{x^2+y^2}{2z}}
 \end{equation*}
 where $z$ is the propagation direction and $k=\omega n/c \simeq \omega/c$.
 
@@ -350,12 +348,12 @@ Hence we can define the spatial dependence of the refence phase $\psi_r(x,y)$ as
 	\psi_r(x,y) = k\frac{x^2+y^2}{2z} = \frac{\omega}{c}\frac{x^2+y^2}{2z}
 \end{equation}
 
-If we plot the phase\footnote{Note that to obtain a smooth function is not as simple as it looks. It is quite a complex problem and it is referred as '\texttt{2D unwrapping problem}'} of the cross-correlation term in the $x-y$ plane for an arbitrary value of delay we see something as represented in Figure (\ref{fig_paraboloid}).
+If we plot the phase\footnote{Note that to obtain a smooth function of the phase is not as simple as it looks. It is quite a complex problem and it is referred as '\texttt{2D unwrapping problem}'} of the cross-correlation term in the $x-y$ plane for an arbitrary value of delay we see something as represented in Figure (\ref{fig_paraboloid}).
 This profile is easily parametrised by a two dimensional polinomial fit which afterwards can be analytically subtracted to the data.
 
 \begin{figure}[hb]
 	\centering
-	\includegraphics[scale=0.7]{data/phase2D}
+	\includegraphics[scale=0.7]{data/paraboloid}
 	\caption{(Color Online) Spatial dependence of the phase at an arbitrary delay $\tau$.}
 	\label{fig_paraboloid}
 \end{figure}
@@ -421,7 +419,7 @@ The filter was generated by elevating to an arbitrarly high power a gaussian fun
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.9]{data/filter}
-	\caption{(Color Online) Spectral amplitude and gaussian filter.}
+	\caption{(Color Online) Spectral amplitude and gaussian filter of an arbitrary single spatial point. The frequency domain has been restricted to the bandwidth of the cross-correlation term.}
 	\label{fig_filter}
 \end{figure}
 
@@ -437,11 +435,15 @@ In Figure (\ref{fig_phase_correction}) are represented the original cross-correl
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.9]{data/phase_correction}
-	\caption{(Color Online) Original cross-correlation phase and dispersion corrected phase.}
+	\caption{(Color Online) Original cross-correlation phase and dispersion corrected phase of an arbitrary single spatial point.}
 	\label{fig_phase_correction}
 \end{figure}
 
-Afterwards we had divide by the spectral amplitude of the reference and add its spectral phase to the data (represented in Figure (\ref{fig_SPIDER_data})), obtaining the complex field in the frequency domain.
+As we can see, the two big slopes, due to the dispersion of the ND filter, have been removed and the new phase function is flatter compared to the original one.
+As a matter of fact a flat phase function is expected for the cross-correlation term gathered from a balanced Mach-Zender interferometer.
+
+Afterwards we had to divide by the spectral amplitude of the reference and add its spectral phase to the data, obtaining the complex field in the frequency domain.
+Both spectral amplitude and phase are represented in Figure (\ref{fig_SPIDER_data}) in a plot with a frequency domain restricted to the pulse bandwidth.
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.9]{data/spider_spectrum_phase}
@@ -452,18 +454,20 @@ Afterwards we had divide by the spectral amplitude of the reference and add its 
 The last step was to apply an inverse Fourier transform on the data to obtain the complex field in the time domain and therefore the complete three dimensional characterisation.
 %\end{}
 \subsection{Results}
-Unfortunately the numerical algorithms did not work and we obtained the true information on the pulse shape hidden under high noise.
+Unfortunately the numerical algorithms did not work properly and we obtained the true information on the pulse shape hidden under high noise.
 
-If we force the phase of the Fourier transform to zero, we obtain the result displayed in Figure (\ref{fig_result})
+To show that what we are watching is after all the correct measurement, we can force the phase of the cross-correlation term - after the gaussian filter - to zero.
+With this escamotage we obtain the result displayed in Figure (\ref{fig_result}), which clearly shows a pulse with a full width at half height (FWHM) of \SI{3.7}{\fs}.
+This means that the true information on the pulse shape is hidden inside the cross-correlation term, therefore implies that the Mach-Zender Interferometer is working as intended and the problems are to be searched for in the analysis algorithms.
 
-\begin{figure}
+\begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.9]{data/spider_spectrum_phase}
-	\caption{(Color Online) Only result.}
+	\includegraphics[scale=0.9]{data/intensity}
+	\caption{(Color Online) Normalised intensity of the pulse for an arbitrary single spatial point.}
 	\label{fig_result}
 \end{figure}
 
-\clearpage
+%\clearpage
 \section{Conclusions}
 \subsection{Improvements}
 %\begin{•}
@@ -474,9 +478,8 @@ Given the fact that we obtained good fringes contrast with a stack of heavy (ND 
 Another solution is to balance the two arms by adding a slab of the same material and thickness of the ND filter in the test arm.
 
 Both solutions lead to the generation of an interferogram with thinner fringes.
-This is a problem because the attuator we used in the esperiment has a minimum step of \SI{47.625}{\nm}, which is not small enough for the resolution required by the new interferogram.
-
-*** formula per calcolare il minimo step richiesto ***
+This may be a problem because the attuator we used in the esperiment has a minimum step of \SI{47.625}{\nm}, which translates into an effective delay step of $c\cdot\SI{95.25}{\nm}$ due to the fact that the beam travels twice along the directon of the delay line.
+This step is just right to sample the shortest wavelenght in the ultrafast laser source bandwidth ($\sim \SI{500}{\nm}$), but may not be small enough to obtain a good sampling for the resolution required by the new interferogram.
 
 As an additional technical improvement corner cube rectroreflector may be used for a better alignment and less sensibility to the mirrors movement.
 
@@ -487,13 +490,12 @@ However, in our system this is not a problem, as the presence of the pinhole eli
 \subsection{Personal considerations}
 %\begin{}
 At the beginning, I had to become familiar with the environment and the equipement in the
-laboratory.
-Furthermore the system itself required high precision due to the extreme conditions of the physics involved (\si{\fs}, \si{\nm}).
-Therefore a considerable amount of time was spent on the alignment procedures and the balancing of the two arms of the interferometer.
-Even though we did not obtain a complete result as hoped, we accomplished several intermediate achievements, such as assembling a working Mach-Zender interferometer.
+laboratory and the system itself required high precision due to the extreme conditions of the physics involved (\si{\fs}, \si{\nm}).
+Therefore a considerable amount of time was spent on the building of the Mach-Zender interferometer, on its alignment procedures and on the balancing of the two arms of the interferometer.
+Even though we did not obtain a complete result as hoped, we accomplished several intermediate achievements, such as the assembly of a working Mach-Zender interferometer.
 
-A strong positive point was also working in an actual research environment, rather than in a academic laboratory.
-For these reasons I am satisfied from the skill gained and I consider this as a positive formative experience.
+A strong positive point was also given by the possibility to work in an actual research environment, rather than in a academic laboratory.
+For these reasons I am satisfied of the skill gained and I consider this as a positive formative experience.
 %\end{}
 
 \clearpage
